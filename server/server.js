@@ -1,10 +1,12 @@
 const express = require("express");
+const logger = require("morgan");
+const axios = require("axios");
+var cors = require("cors");
 
 const app = express();
-var cors = require("cors");
 const port = process.env.PORT || 5000;
 app.use(cors());
-const axios = require("axios");
+app.use(logger("dev"));
 
 const gitHubRepoSearchURL = "https://api.github.com/search/repositories";
 // header: { Accept: application/vnd.github.mercy-preview+json}
@@ -34,22 +36,30 @@ let headers = {
   Accept: "application/vnd.github.mercy-preview+json",
 };
 
-app.get("/searchTerm", async (req, res) => {
-  try {
-    const searchTerm = req.params.searchTerm;
-    let gitHubSearch = "https://api.github.com/search/repositories?q=tetris";
-    // const result = await axios.get(`${gitHubRepoSearchURL}?q=${searchTerm}`);
-    const result = await axios.get(gitHubSearch, headers);
-    console.log(result);
+app.get("/searchGitHub/:searchTerm", async (req, res) => {
+  const { searchTerm } = req.params;
+  let gitHubSearch = `https://api.github.com/search/repositories?q=${searchTerm}`;
+  const result = await axios.get(gitHubSearch, headers);
 
-    return res.status(200).send({
-      error: false,
-      data2: "hello",
-      data: result.data,
-    });
-  } catch (error) {
-    console.log(error);
+  if (res.status(200)) {
+    return res.send({ status: result.status, data: result.data });
+  } else {
+    let error = res.error;
+    res.send({ status: result.status, message: result.statusText });
   }
 });
+
+// app.get("/searchTerm", async (req, res) => {
+//   const searchTerm = req.params.searchTerm;
+//   let gitHubSearch = "https://api.github.com/search/repositories?q=tetris";
+//   const result = await axios.get(gitHubSearch, headers);
+
+//   if (res.status(200)) {
+//     return res.send({ status: result.status, data: result.data });
+//   } else {
+//     let error = res.error;
+//     res.send({ status: result.status, message: result.statusText });
+//   }
+// });
 
 module.exports = app;

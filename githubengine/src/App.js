@@ -5,14 +5,13 @@ function App() {
   const [state, setState] = useState({ data: null });
 
   useEffect(() => {
-    callBackEnd()
+    callBackEnd("tetris react")
       .then((res) => setState({ data: res.data.total_count }))
-      .then((res) => console.log(res, "res"))
       .catch((err) => console.log(err));
   }, []);
 
-  const callBackEnd = async () => {
-    const response = await fetch("http://localhost:5000/searchTerm");
+  const callBackEnd = async (searchTerm) => {
+    const response = await fetch(`/searchGitHub/${searchTerm}`);
     const body = await response.json();
 
     if (response.status !== 200) {
