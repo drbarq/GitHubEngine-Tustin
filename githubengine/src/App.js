@@ -6,12 +6,13 @@ function App() {
 
   useEffect(() => {
     callBackEnd()
-      .then((res) => setState({ data: res.express }))
+      .then((res) => setState({ data: res.data.total_count }))
+      .then((res) => console.log(res, "res"))
       .catch((err) => console.log(err));
   }, []);
 
   const callBackEnd = async () => {
-    const response = await fetch("/express_backend");
+    const response = await fetch("http://localhost:5000/searchTerm");
     const body = await response.json();
 
     if (response.status !== 200) {
