@@ -24,9 +24,11 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h4>State.data: {state.data}</h4>
-      <SearchBar />
+    <div className="App-root">
+      <div className="App-container">
+        <h4>GitHub Engine</h4>
+        <SearchBar />
+      </div>
     </div>
   );
 }
