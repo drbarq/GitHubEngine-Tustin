@@ -17,11 +17,14 @@
     .form {
       display: flex;
       justify-content: space-evenly;
-      width: 80%;
+      width: 70%;
     }
 
     .input {
       display: flex;
+      &:focus {
+        width: 80%;
+      }
     }
   }
 }

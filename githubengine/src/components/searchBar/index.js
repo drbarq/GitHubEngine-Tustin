@@ -3,12 +3,28 @@ import "./styles.scss";
 
 const SearchBar = () => {
   const [searchTerm, setSerchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState({ data: null });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     e.persist();
 
     console.log(searchTerm, "searchTerm");
+
+    let results = await callBackEnd(searchTerm);
+    console.log("results", results);
+    setSearchResults({ data: results.data });
+  };
+
+  const callBackEnd = async (searchTerm) => {
+    const response = await fetch(`/searchGitHub/${searchTerm}`);
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message);
+    } else {
+      return body;
+    }
   };
 
   return (
