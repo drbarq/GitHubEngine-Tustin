@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./App.css";
+import "./App.scss";
+
+import SearchBar from "./components/searchBar";
 
 function App() {
   const [state, setState] = useState({ data: null });
@@ -24,6 +26,7 @@ function App() {
   return (
     <div className="App">
       <h4>State.data: {state.data}</h4>
+      <SearchBar />
     </div>
   );
 }

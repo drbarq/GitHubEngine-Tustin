@@ -31,35 +31,25 @@ app.listen(port, () => console.log(`Listening on Port ${port}`));
 //   res.send({ express: "your express backend is connected to react" });
 // });
 
-let headers = {
+let gitHubHeaders = {
   "Access-Control-Allow-Origin": "*",
   Accept: "application/vnd.github.mercy-preview+json",
 };
 
 app.get("/searchGitHub/:searchTerm", async (req, res) => {
   const { searchTerm } = req.params;
-  let gitHubSearch = `https://api.github.com/search/repositories?q=${searchTerm}`;
-  const result = await axios.get(gitHubSearch, headers);
+  let gitHubSearchURL = `https://api.github.com/search/repositories?q=${searchTerm}`;
+  const result = await axios.get(gitHubSearchURL, gitHubHeaders);
 
   if (res.status(200)) {
     return res.send({ status: result.status, data: result.data });
   } else {
-    let error = res.error;
-    res.send({ status: result.status, message: result.statusText });
+    res.send({
+      status: result.status,
+      message: result.statusText,
+      resError: res.error,
+    });
   }
 });
-
-// app.get("/searchTerm", async (req, res) => {
-//   const searchTerm = req.params.searchTerm;
-//   let gitHubSearch = "https://api.github.com/search/repositories?q=tetris";
-//   const result = await axios.get(gitHubSearch, headers);
-
-//   if (res.status(200)) {
-//     return res.send({ status: result.status, data: result.data });
-//   } else {
-//     let error = res.error;
-//     res.send({ status: result.status, message: result.statusText });
-//   }
-// });
 
 module.exports = app;
