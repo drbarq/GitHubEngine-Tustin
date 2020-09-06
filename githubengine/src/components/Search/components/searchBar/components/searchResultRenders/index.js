@@ -9,60 +9,30 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
 
   const [sort, setSort] = useState({
     name: "",
-    accend: true,
+    accend: null,
   });
 
-  /**
-   * accend = true
-   * decend = false
-   */
-
   useEffect(() => {
-    // sortData();
     updateCurrentSort();
-    // }, [sort]);
-  }, []);
-  // useEffect(() => {
-  //   generateRepoResults(items);
-  // }, [searchResults]);
-
-  console.log(searchResults, "searchResults");
-
-  const generateRepoResults = (items) => {
-    items.forEach((item) => {
-      console.log(item, "item");
-    });
-  };
+  }, [sort.name]);
 
   const sortData = () => {
     return items.sort((a, b) => {
-      if (!sort.accend) {
-        return 0;
-      } else {
-        return a[sort.name] > b[sort.name] ? 1 : -1;
-      }
+      return a[sort.name] < b[sort.name] ? 1 : -1;
     });
   };
 
-  const sortItemsDirection = () => {
-    if (sort.accend) {
-      sortData();
-    } else {
-      sortData().reverse();
-    }
-  };
+  // const sortItemsDirection = () => {
+  //   if (sort.accend) {
+  //     sortData();
+  //   } else {
+  //     sortData().reverse();
+  //   }
+  // };
 
   const updateCurrentSort = (atttributeName = sort.name) => {
-    console.log(atttributeName);
-    console.log(sort, "sort1");
-
+    sort.accend ? sortData() : sortData().reverse();
     setSort({ name: atttributeName, accend: !sort.accend });
-
-    sortItemsDirection();
-
-    console.log(sort, "sort2");
-
-    // updateSortDirection();
   };
 
   const TableHeaderLabel = () => {
