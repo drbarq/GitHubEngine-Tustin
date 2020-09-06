@@ -13,22 +13,28 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
     name: "",
     accend: null,
     filterLanguage: "all",
-    items: [],
+    filteredItems: items,
   });
 
   useEffect(() => {
     updateCurrentSort();
   }, [sort.name]);
 
-  useEffect(() => {
-    filterRepoByLanguage();
-  }, [sort.filterLanguage]);
+  // useEffect(() => {
+  //   console.log("filter hit");
+  //   filterRepoByLanguage();
+  // }, [sort.filterLanguage]);
 
   const sortData = () => {
-    return items.sort((a, b) => {
+    return sort.filteredItems.sort((a, b) => {
       return a[sort.name] < b[sort.name] ? 1 : -1;
     });
   };
+  // const sortData = () => {
+  //   return items.sort((a, b) => {
+  //     return a[sort.name] < b[sort.name] ? 1 : -1;
+  //   });
+  // };
 
   const updateCurrentSort = (atttributeName = sort.name) => {
     sort.accend ? sortData() : sortData().reverse();
@@ -63,7 +69,7 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
   };
 
   const TableDataRow = (items) => {
-    return items.map((repo, index) => {
+    return sort.filteredItems.map((repo, index) => {
       return (
         <tr key={repo.id} className="repoInformation-row">
           <td>{repo.description}</td>
@@ -73,29 +79,87 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
       );
     });
   };
+  // const TableDataRow = (items) => {
+  //   return items.map((repo, index) => {
+  //     return (
+  //       <tr key={repo.id} className="repoInformation-row">
+  //         <td>{repo.description}</td>
+  //         <td>{repo.score}</td>
+  //         <td>{repo.stargazers_count}</td>
+  //       </tr>
+  //     );
+  //   });
+  // };
 
   const itemLanguages = () => {
     let languages = [];
-    items.forEach((repo) => {
+    sort.filteredItems.forEach((repo) => {
       return languages.includes(repo.language)
         ? null
         : languages.push(repo.language);
     });
     return languages;
   };
+  // const itemLanguages = () => {
+  //   let languages = [];
+  //   items.forEach((repo) => {
+  //     return languages.includes(repo.language)
+  //       ? null
+  //       : languages.push(repo.language);
+  //   });
+  //   return languages;
+  // };
 
   const filterRepoByLanguage = () => {
-    let filtered = items.filter((repo) => {
+    let filtered = sort.filteredItems.filter((repo) => {
       return repo.language === sort.filterLanguage;
     });
 
-    setSort({ ...sort, items: filtered });
+    setSort({ ...sort, filteredItems: filtered });
   };
+  // const filterRepoByLanguage = () => {
+  //   let filtered = items.filter((repo) => {
+  //     return repo.language === sort.filterLanguage;
+  //   });
+
+  //   setSort({ ...sort, filteredItems: filtered });
+  // };
 
   const generateLanguageSelections = () => {
+    // let languageFiltered = sort.filteredItems.filter((repo) => {
+    //   return repo.language === sort.filterLanguage;
+    // });
+
     const handleSelection = (e) => {
-      setSort({ ...sort, filterLanguage: e.target.value });
-      // filterRepoByLanguage();
+      let languageSelected = e.target.value;
+
+      // let languageFiltered = sort.filteredItems.filter((repo) => {
+      //   return repo.language === languageSelected
+      // });
+
+      // setSort({
+      //   ...sort,
+      //   filterLanguage: e.target.value,
+      //   filteredItems: languageFiltered
+      // });
+
+      if (languageSelected !== "all") {
+        let languageFiltered = sort.filteredItems.filter((repo) => {
+          return repo.language === languageSelected;
+        });
+
+        setSort({
+          ...sort,
+          filterLanguage: e.target.value,
+          filteredItems: languageFiltered,
+        });
+      } else {
+        setSort({
+          ...sort,
+          filterLanguage: e.target.value,
+          filteredItems: items,
+        });
+      }
     };
 
     let languageSelections = [<option value="all">--</option>];
