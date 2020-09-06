@@ -1,18 +1,18 @@
 import React from "react";
 import "./styles.scss";
+import Search from "../Search";
 
 import { useParams, useHistory, Link } from "react-router-dom";
-const Details = ({ selectedRepo }) => {
+const Details = ({ searchedRepos }) => {
   const { repoId } = useParams();
 
-  console.log(selectedRepo);
+  console.log(searchedRepos);
 
-  const repo = selectedRepo.find((repos) => {
+  const repo = searchedRepos.find((repos) => {
     return repos.id === Number(repoId);
-    // console.log(repos, "repos");
   });
 
-  if (selectedRepo === undefined) {
+  if (searchedRepos === undefined) {
     return (
       <div className="error-container">
         <h3>Shoot! Looks like we hit a snag, lets head back </h3>
@@ -35,21 +35,9 @@ const Details = ({ selectedRepo }) => {
     owner: { avatar_url, url, login, html_url: owner_html_url },
   } = repo;
 
-  //   let {
-  //     name,
-  //     html_url,
-  //     description,
-  //     created_at,
-  //     updated_at,
-  //     stargazers_count,
-  //     language,
-  //     forks_count,
-  //     watchers,
-  //     owner: { avatar_url, url, login, html_url: owner_html_url },
-  //   } = selectedRepo;
-
   return (
     <div className="Details-container">
+      <Link to="/">Home</Link>
       {/* <h1>Repo Details</h1> */}
       <div className="headerLink-container">
         <img src={avatar_url} />

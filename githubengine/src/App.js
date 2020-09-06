@@ -21,7 +21,12 @@ function App() {
           />
           <Route
             path="/details/:repoId"
-            component={() => <Details searchedRepos={searchedRepos} />}
+            component={() => (
+              <Details
+                searchedRepos={searchedRepos}
+                setSearchedRepos={setSearchedRepos}
+              />
+            )}
           />
           <Route component={Error} />
         </Switch>
