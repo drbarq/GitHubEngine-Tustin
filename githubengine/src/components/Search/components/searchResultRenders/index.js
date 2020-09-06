@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
   let {
     searchedTerm,
-    data: { total_count, incomplete_results, items },
+    data: { items },
   } = searchResults;
 
   const [sort, setSort] = useState({
@@ -15,10 +15,6 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
     languages: [],
     filteredItems: items,
   });
-
-  useEffect(() => {
-    updateCurrentSort();
-  }, [sort.name]);
 
   useEffect(() => {
     itemLanguages();
@@ -34,6 +30,21 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
     sort.accend ? sortData() : sortData().reverse();
     setSort({ ...sort, name: atttributeName, accend: !sort.accend });
   };
+
+  const itemLanguages = () => {
+    let languages = [];
+    sort.filteredItems.forEach((repo) => {
+      return languages.includes(repo.language)
+        ? null
+        : languages.push(repo.language);
+    });
+
+    setSort({ ...sort, languages });
+  };
+
+  // useEffect(() => {
+  //   updateCurrentSort();
+  // }, [sort.name]);
 
   const TableHeaderLabel = () => {
     const repoAttributes = [
@@ -99,17 +110,6 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
         </tr>
       );
     });
-  };
-
-  const itemLanguages = () => {
-    let languages = [];
-    sort.filteredItems.forEach((repo) => {
-      return languages.includes(repo.language)
-        ? null
-        : languages.push(repo.language);
-    });
-
-    setSort({ ...sort, languages });
   };
 
   const generateLanguageSelections = () => {

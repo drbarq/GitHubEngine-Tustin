@@ -1,18 +1,26 @@
 import React from "react";
 import "./styles.scss";
-import Search from "../Search";
 
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 const Details = ({ searchedRepos }) => {
   const { repoId } = useParams();
-
-  console.log(searchedRepos);
 
   if (searchedRepos === undefined) {
     return (
       <div className="error-container">
         <h3>Shoot! Looks like we hit a snag, lets head back </h3>
-        <Link to="/">Home</Link>
+        <Link to="/">
+          <div className="navContainer">
+            <i className="fas fa-home"></i>
+            <div className="title">Home</div>
+          </div>
+        </Link>
+        <div className="failImage">
+          <img
+            className="image"
+            src="https://media.giphy.com/media/li0dswKqIZNpm/giphy.gif"
+          />
+        </div>
       </div>
     );
   }
@@ -21,7 +29,6 @@ const Details = ({ searchedRepos }) => {
     return repos.id === Number(repoId);
   });
 
-  //   const { repoId } = useParams();
   let {
     name,
     html_url,
@@ -32,31 +39,31 @@ const Details = ({ searchedRepos }) => {
     language,
     forks_count,
     watchers,
-    owner: { avatar_url, url, login, html_url: owner_html_url },
+    owner: { avatar_url, login, html_url: owner_html_url },
   } = repo;
 
   return (
     <div className="Details-container">
       <div className="headerLink-container">
-        <img src={avatar_url} />
+        <Link to="/">
+          <div className="navContainer">
+            <i className="fas fa-home"></i>
+            <div className="title">Home</div>
+          </div>
+        </Link>
         <div className="gihubLink">
           <div className="owner">
-            <a href={owner_html_url} target="_blank">
+            <a href={owner_html_url} target="_blank" rel="noopener noreferrer">
               {login}/
             </a>
           </div>
           <div className="repoName">
-            <a href={html_url} target="_blank">
+            <a href={html_url} target="_blank" rel="noopener noreferrer">
               {name}
             </a>
           </div>
         </div>
-        <Link to="/">
-          <div className="navContainer">
-            <i class="fas fa-home"></i>
-            <div className="title">Home</div>
-          </div>
-        </Link>
+        <img src={avatar_url} alt={`${name} avatar`} />
       </div>
       <div className="about">
         <p>
@@ -70,13 +77,13 @@ const Details = ({ searchedRepos }) => {
       </div>
       <div className="repoStats-container">
         <div className="stat">
-          <i class="fas fa-code-branch"> {forks_count}</i>
+          <i className="fas fa-code-branch"> {forks_count}</i>
         </div>
         <div className="stat">
-          <i class="far fa-star"> {stargazers_count}</i>
+          <i className="far fa-star"> {stargazers_count}</i>
         </div>
         <div className="stat">
-          <i class="far fa-eye"> {watchers}</i>
+          <i className="far fa-eye"> {watchers}</i>
         </div>
       </div>
       <div className="createdStats-container">

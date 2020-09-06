@@ -1,11 +1,12 @@
 .Details-container {
   display: flex;
   flex-direction: column;
-  align-self: center;
   align-items: center;
   width: 90%;
   border-radius: 15px;
   background-color: lighten(#4cd7d0, 30%);
+  height: 55vh;
+  justify-content: space-between;
 
   .headerLink-container {
     display: flex;
@@ -57,6 +58,7 @@
     flex-direction: row;
     justify-content: space-around;
     margin: 1.5vh 0;
+    width: 90%;
 
     .created {
       text-align: center;
@@ -66,8 +68,40 @@
   }
 }
 
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  text-align: center;
+  background-color: #e1c340;
+  border-radius: 15px;
+  height: 60vh;
+
+  .failImage {
+    // width: 80%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 2vh;
+
+    .image {
+      width: 80%;
+    }
+  }
+
+  .navContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 @media (max-width: 768px) {
   .Details-container {
+    height: 85vh;
+    justify-content: space-between;
+
     .headerLink-container {
       width: 100%;
       flex-direction: column;
@@ -77,6 +111,9 @@
         margin: 1vh;
         height: 100%;
         width: 30vw;
+      }
+      .gihubLink {
+        flex-direction: column;
       }
     }
 
