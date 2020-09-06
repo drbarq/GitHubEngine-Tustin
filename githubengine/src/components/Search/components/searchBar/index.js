@@ -56,7 +56,6 @@ const SearchBar = () => {
             value={searchTerm}
             placeholder="Search GitHub Engine"
             onChange={(event) => setSearchTerm(event.target.value)}
-            // onChange={(event) => newSearch(event.target.value)}
           />
           <button type="submit" form="searchForm" className="button">
             Search

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./styles.scss";
+import { Link } from "react-router-dom";
 
 const SearchResultRenders = ({ searchResults, setSearchResults }) => {
   let {
@@ -70,15 +71,18 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
   const TableDataRow = (items) => {
     return sort.filteredItems.map((repo, index) => {
       return (
-        <tr
-          key={repo.id}
-          className="repoInformation-row"
-          onClick={() => console.log(`clicked ${repo.id}`)}
-        >
-          <td>{repo.description}</td>
-          <td>{repo.score}</td>
-          <td>{repo.stargazers_count}</td>
-        </tr>
+        <Link to="/details">
+          <tr
+            key={repo.id}
+            className="repoInformation-row"
+            // onClick={() => console.log(`clicked ${repo.id}`)}
+            // onClick={() => <Link to="/details" />}
+          >
+            <td>{repo.description}</td>
+            <td>{repo.score}</td>
+            <td>{repo.stargazers_count}</td>
+          </tr>
+        </Link>
       );
     });
   };
