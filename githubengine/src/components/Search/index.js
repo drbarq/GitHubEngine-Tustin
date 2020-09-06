@@ -1,15 +1,79 @@
-import React from "react";
+import React, { useState } from "react";
 import "./styles.scss";
 
-import SearchBar from "./components/searchBar";
-import SearchResultRenders from "./components/searchBar/components/searchResultRenders";
+import SearchResultRenders from "./components/searchResultRenders";
 
-const Search = () => {
+const SearchBar = (props) => {
+  console.log("props", props);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState({
+    searchedTerm: "",
+    data: {
+      items: [],
+      incomplete_results: null,
+      total_count: null,
+    },
+  });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    e.persist();
+    // reset search results
+    setSearchResults({
+      searchedTerm: "",
+      data: {
+        items: [],
+        incomplete_results: null,
+        total_count: null,
+      },
+    });
+
+    let results = await callBackEnd(searchTerm);
+    setSearchResults({ searchedTerm: searchTerm, data: results.data });
+  };
+
+  const callBackEnd = async (searchTerm) => {
+    const response = await fetch(`/searchGitHub/${searchTerm}`);
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message);
+    } else {
+      return body;
+    }
+  };
+
   return (
-    <div className="Search-container">
-      <SearchBar />
+    <div className="searchBar-container">
+      <div className="form-container">
+        <form id="searchForm" onSubmit={handleSubmit} className="form">
+          <input
+            id="searchTerm"
+            name="searchTerm"
+            required
+            maxLength={256}
+            className="input"
+            type="text"
+            value={searchTerm}
+            placeholder="Search GitHub Engine"
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+          <button type="submit" form="searchForm" className="button">
+            Search
+          </button>
+        </form>
+      </div>
+      {searchResults.data.items.length > 0 ? (
+        <SearchResultRenders
+          searchResults={searchResults}
+          setSearchResults={setSearchResults}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 };
 
-export default Search;
+export default SearchBar;
