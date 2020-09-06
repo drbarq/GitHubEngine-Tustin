@@ -30,8 +30,6 @@ function App() {
           />
           <Route component={Error} />
         </Switch>
-
-        {/* <Search /> */}
       </div>
     </div>
   );

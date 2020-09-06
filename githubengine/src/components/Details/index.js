@@ -1,28 +1,13 @@
 import React from "react";
 import "./styles.scss";
+import ErrorScreen from "./components/ErrorScreen";
 
 import { useParams, Link } from "react-router-dom";
 const Details = ({ searchedRepos }) => {
   const { repoId } = useParams();
 
   if (searchedRepos === undefined) {
-    return (
-      <div className="error-container">
-        <h3>Shoot! Looks like we hit a snag, lets head back </h3>
-        <Link to="/">
-          <div className="navContainer">
-            <i className="fas fa-home"></i>
-            <div className="title">Home</div>
-          </div>
-        </Link>
-        <div className="failImage">
-          <img
-            className="image"
-            src="https://media.giphy.com/media/li0dswKqIZNpm/giphy.gif"
-          />
-        </div>
-      </div>
-    );
+    return <ErrorScreen />;
   }
 
   const repo = searchedRepos.find((repos) => {
