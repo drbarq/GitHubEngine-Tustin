@@ -60,14 +60,9 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
       }
 
       return (
-        <th key={index} onClick={(event) => updateCurrentSort(atttribute.name)}>
+        <th key={index} onClick={() => updateCurrentSort(atttribute.name)}>
           {atttribute.label} {arrowDirection}
         </th>
-        // <th key={index}>
-        //   <button onClick={(event) => updateCurrentSort(atttribute.name)}>
-        //     {atttribute.label} {arrowDirection}
-        //   </button>
-        // </th>
       );
     });
   };
