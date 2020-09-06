@@ -41,7 +41,17 @@ const Details = ({ searchedRepos }) => {
       {/* <h1>Repo Details</h1> */}
       <div className="headerLink-container">
         <img src={avatar_url} />
-        <h3>
+        <div className="owner">
+          <a href={html_url} target="_blank">
+            {login}/
+          </a>
+        </div>
+        <div className="repoName">
+          <a href={html_url} target="_blank">
+            /{name}
+          </a>
+        </div>
+        {/* <h3>
           <a href={owner_html_url} target="_blank">
             {login}
           </a>{" "}
@@ -49,7 +59,7 @@ const Details = ({ searchedRepos }) => {
         </h3>
         <h3>
           /<a href={html_url}> {name}</a>
-        </h3>
+        </h3> */}
       </div>
       <div className="about">
         <p>About: {description}</p>
