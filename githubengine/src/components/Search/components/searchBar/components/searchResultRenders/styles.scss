@@ -25,30 +25,45 @@
   }
   .results-table {
     width: 100%;
-    a {
-      display: inline;
-      width: 100%;
-    }
+    vertical-align: middle;
 
-    tr:hover {
-      cursor: pointer;
-      background-color: #f5f5f5;
+    tr {
+      border: 1px solid #ddd;
     }
 
     .repoInformation-row {
       border-spacing: 2rem;
-      background-color: hotpink;
+      //   background-color: hotpink;
+
+      a:link {
+        color: #362f3f;
+      }
+
+      a:visited {
+        color: lighten(#362f3f, 30%);
+      }
 
       td {
         text-align: left;
-        padding: 15px;
         width: 20%;
+        padding: 6px 13px;
       }
 
       td:first-child {
-        background-color: #f2f2f2;
+        // background-color: #f2f2f2;
         width: 60%;
       }
+    }
+    tr:nth-child(even) {
+      background-color: #a4e8e0;
+    }
+    tr:nth-child(odd) {
+      background-color: #4cd7d0;
+    }
+
+    tr:hover {
+      cursor: pointer;
+      background-color: #f8ea8c;
     }
   }
 }
