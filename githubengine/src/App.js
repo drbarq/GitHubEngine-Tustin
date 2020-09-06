@@ -7,21 +7,21 @@ import Details from "./components/Details";
 import Error from "./components/Error";
 
 function App() {
-  const [selectedRepo, setSelectedRepo] = useState();
+  const [searchedRepos, setSearchedRepos] = useState();
 
   return (
     <div className="App-root">
       <div className="App-container">
-        <h4>GitHub Engine</h4>
+        <div className="title-header">GitHub Engine</div>
         <Switch>
           <Route
             path="/"
-            component={() => <Search setSelectedRepo={setSelectedRepo} />}
+            component={() => <Search setSearchedRepos={setSearchedRepos} />}
             exact
           />
           <Route
             path="/details/:repoId"
-            component={() => <Details selectedRepo={selectedRepo} />}
+            component={() => <Details searchedRepos={searchedRepos} />}
           />
           <Route component={Error} />
         </Switch>

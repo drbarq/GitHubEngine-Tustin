@@ -3,7 +3,7 @@ import "./styles.scss";
 
 import SearchResultRenders from "./components/searchResultRenders";
 
-const SearchBar = ({ setSelectedRepo }) => {
+const SearchBar = ({ setSearchedRepos }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState({
     searchedTerm: "",
@@ -65,7 +65,7 @@ const SearchBar = ({ setSelectedRepo }) => {
       {searchResults.data.items.length > 0 ? (
         <SearchResultRenders
           searchResults={searchResults}
-          setSelectedRepo={setSelectedRepo}
+          setSearchedRepos={setSearchedRepos}
         />
       ) : (
         ""

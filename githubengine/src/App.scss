@@ -11,6 +11,13 @@
     align-items: center;
     border: 1px solid green;
     height: 100vh;
+
+    .title-header {
+      font-weight: bold;
+      letter-spacing: 0.4rem;
+      font-size: 2rem;
+      margin: 2vh 0;
+    }
   }
 }
 
