@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import "./styles.scss";
 
+import SearchResultRenders from "./components/searchResultRenders";
+
 const SearchBar = () => {
-  const [searchTerm, setSerchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState({ data: null });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState({
+    searchedTerm: "",
+    data: {
+      items: [],
+      incomplete_results: null,
+      total_count: null,
+    },
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.persist();
-
-    console.log(searchTerm, "searchTerm");
-
     let results = await callBackEnd(searchTerm);
-    console.log("results", results);
-    setSearchResults({ data: results.data });
+    setSearchResults({ searchedTerm: searchTerm, data: results.data });
+    setSearchTerm("");
   };
 
   const callBackEnd = async (searchTerm) => {
@@ -40,13 +46,18 @@ const SearchBar = () => {
             type="text"
             value={searchTerm}
             placeholder="Search GitHub Engine"
-            onChange={(event) => setSerchTerm(event.target.value)}
+            onChange={(event) => setSearchTerm(event.target.value)}
           />
           <button type="submit" form="searchForm" className="button">
             Search
           </button>
         </form>
       </div>
+      {searchResults.data.items.length > 0 ? (
+        <SearchResultRenders searchResults={searchResults} />
+      ) : (
+        ""
+      )}
     </div>
   );
 };

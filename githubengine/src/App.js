@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "./App.scss";
 
-import SearchBar from "./components/searchBar";
+import SearchBar from "./components/Search/components/searchBar";
+import Search from "./components/Search";
 
 function App() {
   const [state, setState] = useState({ data: null });
@@ -27,7 +28,7 @@ function App() {
     <div className="App-root">
       <div className="App-container">
         <h4>GitHub Engine</h4>
-        <SearchBar />
+        <Search />
       </div>
     </div>
   );
