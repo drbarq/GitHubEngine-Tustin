@@ -1,29 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./App.scss";
 
 import SearchBar from "./components/Search/components/searchBar";
 import Search from "./components/Search";
 
 function App() {
-  const [state, setState] = useState({ data: null });
-
-  // useEffect(() => {
-  //   callBackEnd("tetris react")
-  //     .then((res) => setState({ data: res.data.total_count }))
-  //     .catch((err) => console.log(err));
-  // }, []);
-
-  // const callBackEnd = async (searchTerm) => {
-  //   const response = await fetch(`/searchGitHub/${searchTerm}`);
-  //   const body = await response.json();
-
-  //   if (response.status !== 200) {
-  //     throw Error(body.message);
-  //   } else {
-  //     return body;
-  //   }
-  // };
-
   return (
     <div className="App-root">
       <div className="App-container">
