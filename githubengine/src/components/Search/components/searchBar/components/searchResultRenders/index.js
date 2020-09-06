@@ -59,8 +59,6 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
         arrowDirection = <i class="fas fa-arrow-down"></i>;
       }
 
-      // let arrowDirection = sort.accend && sort.name === atttribute.name ? <i class="fas fa-arrow-up"></i> : <i class="fas fa-arrow-down"></i>
-
       return (
         <th key={index}>
           <buton onClick={(event) => updateCurrentSort(atttribute.name)}>

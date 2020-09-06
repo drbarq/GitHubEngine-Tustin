@@ -13,3 +13,11 @@
     height: 100vh;
   }
 }
+
+@media (max-width: 768px) {
+  .App-root {
+    .App-container {
+      width: 100vw;
+    }
+  }
+}
