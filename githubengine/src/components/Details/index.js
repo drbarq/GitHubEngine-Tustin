@@ -30,7 +30,16 @@ const Details = ({ selectedRepo }) => {
     <div className="Details-container">
       <h1>Repo Details</h1>
       <div className="headerLink-container">
-        <a href={owner_html_url}>{login}</a>
+        <img src={avatar_url} />
+        <h3>
+          <a href={owner_html_url}>{login}</a> /
+        </h3>
+        <h3>
+          /<a href={html_url}> {name}</a>
+        </h3>
+      </div>
+      <div className="about">
+        <h4>{description}</h4>
       </div>
     </div>
   );

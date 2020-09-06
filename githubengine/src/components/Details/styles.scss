@@ -5,5 +5,23 @@
   border: 1px solid green;
 
   .headerLink-container {
+    display: flex;
+    flex-direction: row;
+    height: 10vh;
+    align-items: center;
+    width: 70%;
+    justify-content: start;
+
+    img {
+      margin: 3vh;
+      height: 8vh;
+    }
+  }
+
+  .about {
+    text-align: center;
+    h4 {
+      margin: 0;
+    }
   }
 }
