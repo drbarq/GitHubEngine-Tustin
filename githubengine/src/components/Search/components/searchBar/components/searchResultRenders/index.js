@@ -54,17 +54,20 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
       let arrowDirection;
 
       if (sort.accend && sort.name === atttribute.name) {
-        arrowDirection = <i class="fas fa-arrow-up"></i>;
+        arrowDirection = <i className="fas fa-arrow-up"></i>;
       } else if (!sort.accend && sort.name === atttribute.name) {
-        arrowDirection = <i class="fas fa-arrow-down"></i>;
+        arrowDirection = <i className="fas fa-arrow-down"></i>;
       }
 
       return (
-        <th key={index}>
-          <buton onClick={(event) => updateCurrentSort(atttribute.name)}>
-            {atttribute.label} {arrowDirection}
-          </buton>
+        <th key={index} onClick={(event) => updateCurrentSort(atttribute.name)}>
+          {atttribute.label} {arrowDirection}
         </th>
+        // <th key={index}>
+        //   <button onClick={(event) => updateCurrentSort(atttribute.name)}>
+        //     {atttribute.label} {arrowDirection}
+        //   </button>
+        // </th>
       );
     });
   };
@@ -72,7 +75,11 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
   const TableDataRow = (items) => {
     return sort.filteredItems.map((repo, index) => {
       return (
-        <tr key={repo.id} className="repoInformation-row">
+        <tr
+          key={repo.id}
+          className="repoInformation-row"
+          onClick={() => console.log(`clicked ${repo.id}`)}
+        >
           <td>{repo.description}</td>
           <td>{repo.score}</td>
           <td>{repo.stargazers_count}</td>
@@ -110,7 +117,11 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
       });
     };
 
-    let languageSelections = [<option value="all">All</option>];
+    let languageSelections = [
+      <option key="all" value="all">
+        All
+      </option>,
+    ];
 
     sort.languages.forEach((language, index) => {
       languageSelections.push(
