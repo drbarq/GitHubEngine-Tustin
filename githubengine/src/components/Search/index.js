@@ -70,6 +70,11 @@ const SearchBar = ({ setSearchedRepos }) => {
       ) : (
         ""
       )}
+      {searchResults.data.total_count === 0 ? (
+        <div>You have yourself a good idea, no repos match those terms</div>
+      ) : (
+        ""
+      )}
     </div>
   );
 };
