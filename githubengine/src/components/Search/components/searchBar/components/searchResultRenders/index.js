@@ -7,8 +7,6 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
     data: { total_count, incomplete_results, items },
   } = searchResults;
 
-  // console.log(items);
-
   const [sort, setSort] = useState({
     name: "",
     accend: null,
@@ -25,21 +23,11 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
     itemLanguages();
   }, []);
 
-  // useEffect(() => {
-  //   console.log("filter hit");
-  //   filterRepoByLanguage();
-  // }, [sort.filterLanguage]);
-
   const sortData = () => {
     return sort.filteredItems.sort((a, b) => {
       return a[sort.name] < b[sort.name] ? 1 : -1;
     });
   };
-  // const sortData = () => {
-  //   return items.sort((a, b) => {
-  //     return a[sort.name] < b[sort.name] ? 1 : -1;
-  //   });
-  // };
 
   const updateCurrentSort = (atttributeName = sort.name) => {
     sort.accend ? sortData() : sortData().reverse();
@@ -84,17 +72,6 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
       );
     });
   };
-  // const TableDataRow = (items) => {
-  //   return items.map((repo, index) => {
-  //     return (
-  //       <tr key={repo.id} className="repoInformation-row">
-  //         <td>{repo.description}</td>
-  //         <td>{repo.score}</td>
-  //         <td>{repo.stargazers_count}</td>
-  //       </tr>
-  //     );
-  //   });
-  // };
 
   const itemLanguages = () => {
     let languages = [];
@@ -105,38 +82,9 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
     });
 
     setSort({ ...sort, languages });
-    // return languages;
   };
-  // const itemLanguages = () => {
-  //   let languages = [];
-  //   items.forEach((repo) => {
-  //     return languages.includes(repo.language)
-  //       ? null
-  //       : languages.push(repo.language);
-  //   });
-  //   return languages;
-  // };
-
-  const filterRepoByLanguage = () => {
-    let filtered = sort.filteredItems.filter((repo) => {
-      return repo.language === sort.filterLanguage;
-    });
-
-    setSort({ ...sort, filteredItems: filtered });
-  };
-  // const filterRepoByLanguage = () => {
-  //   let filtered = items.filter((repo) => {
-  //     return repo.language === sort.filterLanguage;
-  //   });
-
-  //   setSort({ ...sort, filteredItems: filtered });
-  // };
 
   const generateLanguageSelections = () => {
-    // let languageFiltered = sort.filteredItems.filter((repo) => {
-    //   return repo.language === sort.filterLanguage;
-    // });
-
     const handleSelection = (e) => {
       let languageSelected = e.target.value;
 
