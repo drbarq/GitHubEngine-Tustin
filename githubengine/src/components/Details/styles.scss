@@ -1,7 +1,7 @@
 .Details-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   border: 1px solid green;
   border-radius: 15px;
   background-color: lighten(#4cd7d0, 30%);
@@ -30,9 +30,21 @@
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    width: 70%;
+    width: 80%;
     font-size: 2.5rem;
     align-self: center;
     margin: 2vh 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .Details-container {
+    .headerLink-container {
+      width: 100%;
+    }
+
+    .repoStats-container {
+      font-size: 1.5rem;
+    }
   }
 }

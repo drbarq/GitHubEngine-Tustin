@@ -8,10 +8,6 @@ const Details = ({ searchedRepos }) => {
 
   console.log(searchedRepos);
 
-  const repo = searchedRepos.find((repos) => {
-    return repos.id === Number(repoId);
-  });
-
   if (searchedRepos === undefined) {
     return (
       <div className="error-container">
@@ -20,6 +16,10 @@ const Details = ({ searchedRepos }) => {
       </div>
     );
   }
+
+  const repo = searchedRepos.find((repos) => {
+    return repos.id === Number(repoId);
+  });
 
   //   const { repoId } = useParams();
   let {
