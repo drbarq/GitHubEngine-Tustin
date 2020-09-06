@@ -3,9 +3,7 @@ import "./styles.scss";
 
 import SearchResultRenders from "./components/searchResultRenders";
 
-const SearchBar = (props) => {
-  console.log("props", props);
-
+const SearchBar = ({ setSelectedRepo }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState({
     searchedTerm: "",
@@ -67,7 +65,7 @@ const SearchBar = (props) => {
       {searchResults.data.items.length > 0 ? (
         <SearchResultRenders
           searchResults={searchResults}
-          setSearchResults={setSearchResults}
+          setSelectedRepo={setSelectedRepo}
         />
       ) : (
         ""

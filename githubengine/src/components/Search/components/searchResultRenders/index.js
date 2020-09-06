@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import { Link } from "react-router-dom";
 
-const SearchResultRenders = ({ searchResults, setSearchResults }) => {
+const SearchResultRenders = ({ searchResults, setSelectedRepo }) => {
   let {
     searchedTerm,
     data: { total_count, incomplete_results, items },
@@ -73,13 +73,28 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
       return (
         <tr key={repo.id} className="repoInformation-row">
           <td>
-            <Link to={`/details/${repo.id}`}>{repo.description}</Link>
+            <Link
+              to={`/details/${repo.id}`}
+              onClick={() => setSelectedRepo(repo)}
+            >
+              {repo.description}
+            </Link>
           </td>
           <td>
-            <Link to={`/details/${repo.id}`}>{repo.score}</Link>
+            <Link
+              to={`/details/${repo.id}`}
+              onClick={() => setSelectedRepo(repo)}
+            >
+              {repo.score}
+            </Link>
           </td>
           <td>
-            <Link to={`/details/${repo.id}`}>{repo.stargazers_count}</Link>
+            <Link
+              to={`/details/${repo.id}`}
+              onClick={() => setSelectedRepo(repo)}
+            >
+              {repo.stargazers_count}
+            </Link>
           </td>
         </tr>
       );
