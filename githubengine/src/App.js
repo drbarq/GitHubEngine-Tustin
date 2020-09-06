@@ -4,7 +4,7 @@ import "./App.scss";
 
 import Search from "./components/Search";
 import Details from "./components/Details";
-import Error from "./components/Error";
+import Error from "./components/Details/components/ErrorScreen";
 
 function App() {
   const [searchedRepos, setSearchedRepos] = useState();

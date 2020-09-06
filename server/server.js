@@ -93,20 +93,4 @@ app.listen(port, () => {
   console.log(`Server running on ${port}`);
 });
 
-// app.get("/searchGitHub/:searchTerm", async (req, res) => {
-//   const { searchTerm } = req.params;
-//   let gitHubSearchURL = `https://api.github.com/search/repositories?q=${searchTerm}`;
-//   const result = await axios.get(gitHubSearchURL, gitHubHeaders);
-
-//   if (res.status(200)) {
-//     return res.send({ status: result.status, data: result.data });
-//   } else {
-//     res.send({
-//       status: result.status,
-//       message: result.statusText,
-//       resError: res.error,
-//     });
-//   }
-// });
-
 module.exports = app;

@@ -2,11 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-evenly;
   width: 90%;
   text-align: center;
   background-color: #e1c340;
   border-radius: 15px;
-  height: 60vh;
+  height: 45vh;
 
   .failImage {
     display: flex;
