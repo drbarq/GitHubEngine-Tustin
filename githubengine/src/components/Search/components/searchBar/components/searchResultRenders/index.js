@@ -13,12 +13,17 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
     name: "",
     accend: null,
     filterLanguage: "all",
+    languages: [],
     filteredItems: items,
   });
 
   useEffect(() => {
     updateCurrentSort();
   }, [sort.name]);
+
+  useEffect(() => {
+    itemLanguages();
+  }, []);
 
   // useEffect(() => {
   //   console.log("filter hit");
@@ -98,7 +103,9 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
         ? null
         : languages.push(repo.language);
     });
-    return languages;
+
+    setSort({ ...sort, languages });
+    // return languages;
   };
   // const itemLanguages = () => {
   //   let languages = [];
@@ -133,38 +140,23 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
     const handleSelection = (e) => {
       let languageSelected = e.target.value;
 
-      // let languageFiltered = sort.filteredItems.filter((repo) => {
-      //   return repo.language === languageSelected
-      // });
+      let languageFiltered = items.filter((repo) => {
+        if (languageSelected === "all") {
+          return items;
+        }
+        return repo.language === languageSelected;
+      });
 
-      // setSort({
-      //   ...sort,
-      //   filterLanguage: e.target.value,
-      //   filteredItems: languageFiltered
-      // });
-
-      if (languageSelected !== "all") {
-        let languageFiltered = sort.filteredItems.filter((repo) => {
-          return repo.language === languageSelected;
-        });
-
-        setSort({
-          ...sort,
-          filterLanguage: e.target.value,
-          filteredItems: languageFiltered,
-        });
-      } else {
-        setSort({
-          ...sort,
-          filterLanguage: e.target.value,
-          filteredItems: items,
-        });
-      }
+      setSort({
+        ...sort,
+        filterLanguage: e.target.value,
+        filteredItems: languageFiltered,
+      });
     };
 
     let languageSelections = [<option value="all">--</option>];
 
-    itemLanguages().forEach((language, index) => {
+    sort.languages.forEach((language, index) => {
       languageSelections.push(
         <option key={index} value={language}>
           {language}
