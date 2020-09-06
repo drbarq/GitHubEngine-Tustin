@@ -54,7 +54,10 @@ const SearchBar = () => {
         </form>
       </div>
       {searchResults.data.items.length > 0 ? (
-        <SearchResultRenders searchResults={searchResults} />
+        <SearchResultRenders
+          searchResults={searchResults}
+          setSearchResults={setSearchResults}
+        />
       ) : (
         ""
       )}

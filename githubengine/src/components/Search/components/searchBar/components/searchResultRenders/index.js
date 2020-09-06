@@ -1,15 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.scss";
 
-const SearchResultRenders = ({ searchResults }) => {
+const SearchResultRenders = ({ searchResults, setSearchResults }) => {
   let {
     searchedTerm,
     data: { total_count, incomplete_results, items },
   } = searchResults;
 
+  const [sort, setSort] = useState({
+    name: "",
+    accend: true,
+  });
+
+  /**
+   * accend = true
+   * decend = false
+   */
+
   useEffect(() => {
-    generateRepoResults(items);
-  }, [searchResults]);
+    // sortData();
+    updateCurrentSort();
+    // }, [sort]);
+  }, []);
+  // useEffect(() => {
+  //   generateRepoResults(items);
+  // }, [searchResults]);
 
   console.log(searchResults, "searchResults");
 
@@ -17,6 +32,37 @@ const SearchResultRenders = ({ searchResults }) => {
     items.forEach((item) => {
       console.log(item, "item");
     });
+  };
+
+  const sortData = () => {
+    return items.sort((a, b) => {
+      if (!sort.accend) {
+        return 0;
+      } else {
+        return a[sort.name] > b[sort.name] ? 1 : -1;
+      }
+    });
+  };
+
+  const sortItemsDirection = () => {
+    if (sort.accend) {
+      sortData();
+    } else {
+      sortData().reverse();
+    }
+  };
+
+  const updateCurrentSort = (atttributeName = sort.name) => {
+    console.log(atttributeName);
+    console.log(sort, "sort1");
+
+    setSort({ name: atttributeName, accend: !sort.accend });
+
+    sortItemsDirection();
+
+    console.log(sort, "sort2");
+
+    // updateSortDirection();
   };
 
   const TableHeaderLabel = () => {
@@ -35,11 +81,12 @@ const SearchResultRenders = ({ searchResults }) => {
       },
     ];
 
-    return repoAttributes.map((atttributes, index) => {
+    return repoAttributes.map((atttribute, index) => {
       return (
         <th key={index}>
-          {atttributes.label}
-          <buton>^^^</buton>
+          <buton onClick={(event) => updateCurrentSort(atttribute.name)}>
+            {atttribute.label}
+          </buton>
         </th>
       );
     });
@@ -48,7 +95,7 @@ const SearchResultRenders = ({ searchResults }) => {
   const TableDataRow = (items) => {
     return items.map((repo, index) => {
       return (
-        <tr key={repo.id}>
+        <tr key={repo.id} className="repoInformation-row">
           <td>{repo.description}</td>
           <td>{repo.score}</td>
           <td>{repo.stargazers_count}</td>
@@ -58,9 +105,9 @@ const SearchResultRenders = ({ searchResults }) => {
   };
 
   return (
-    <div>
+    <div className="SearchResultsRender-container">
       <h1>Searched Term: {searchedTerm}</h1>
-      <table>
+      <table className="results-table">
         <thead>
           <tr>{TableHeaderLabel()}</tr>
         </thead>
