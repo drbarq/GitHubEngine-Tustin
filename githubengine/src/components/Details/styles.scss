@@ -1,6 +1,8 @@
 .Details-container {
   display: flex;
   flex-direction: column;
+  align-self: center;
+  align-items: center;
   width: 90%;
   border-radius: 15px;
   background-color: lighten(#4cd7d0, 30%);
@@ -11,20 +13,30 @@
     height: 10vh;
     align-items: center;
     width: 90%;
-    justify-content: start;
+    justify-content: space-between;
 
     img {
       margin: 3vh;
       height: 8vh;
     }
+    .gihubLink {
+      display: flex;
+      flex-direction: row;
+      .owner,
+      .repoName {
+        font-size: 2rem;
+      }
+    }
 
-    .owner,
-    .repoName {
-      font-size: 2rem;
+    .navContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
   }
 
-  .about {
+  .about,
+  .language {
     text-align: center;
     font-size: 1.3rem;
     font-weight: lighter;
@@ -38,6 +50,19 @@
     font-size: 2.5rem;
     align-self: center;
     margin: 2vh 0;
+  }
+
+  .createdStats-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 1.5vh 0;
+
+    .created {
+      text-align: center;
+      font-size: 1rem;
+      font-weight: lighter;
+    }
   }
 }
 
@@ -55,8 +80,17 @@
       }
     }
 
+    .about,
+    .language {
+      font-size: 1rem;
+    }
+
     .repoStats-container {
       font-size: 1.5rem;
+    }
+
+    .createdStats-container {
+      flex-direction: column;
     }
   }
 }
