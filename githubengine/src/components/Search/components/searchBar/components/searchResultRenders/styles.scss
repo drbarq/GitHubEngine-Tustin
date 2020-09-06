@@ -1,5 +1,29 @@
 .SearchResultsRender-container {
+  width: 90%;
+  margin: 3vh 2vh;
+
+  .header-container {
+    h1,
+    h4 {
+      margin: 0;
+    }
+
+    display: flex;
+    flex-direction: row;
+    margin: 2vh;
+
+    justify-content: space-between;
+    .filter-container {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      width: 30%;
+      justify-content: space-evenly;
+    }
+  }
   .results-table {
+    width: 100%;
+
     .repoInformation-row {
       border-spacing: 2rem;
       background-color: hotpink;

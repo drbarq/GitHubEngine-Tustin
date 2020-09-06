@@ -8,7 +8,7 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
   } = searchResults;
 
   const [sort, setSort] = useState({
-    name: "",
+    name: "score",
     accend: null,
     filterLanguage: "all",
     languages: [],
@@ -51,10 +51,20 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
     ];
 
     return repoAttributes.map((atttribute, index) => {
+      let arrowDirection;
+
+      if (sort.accend && sort.name === atttribute.name) {
+        arrowDirection = <i class="fas fa-arrow-up"></i>;
+      } else if (!sort.accend && sort.name === atttribute.name) {
+        arrowDirection = <i class="fas fa-arrow-down"></i>;
+      }
+
+      // let arrowDirection = sort.accend && sort.name === atttribute.name ? <i class="fas fa-arrow-up"></i> : <i class="fas fa-arrow-down"></i>
+
       return (
         <th key={index}>
           <buton onClick={(event) => updateCurrentSort(atttribute.name)}>
-            {atttribute.label}
+            {atttribute.label} {arrowDirection}
           </buton>
         </th>
       );
@@ -102,7 +112,7 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
       });
     };
 
-    let languageSelections = [<option value="all">--</option>];
+    let languageSelections = [<option value="all">All</option>];
 
     sort.languages.forEach((language, index) => {
       languageSelections.push(
@@ -121,9 +131,14 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
 
   return (
     <div className="SearchResultsRender-container">
-      <h1>Searched Term: {searchedTerm}</h1>
-      <h4>Filter By:</h4>
-      {generateLanguageSelections()}
+      <div className="header-container">
+        <h1>Searched Term: {searchedTerm}</h1>
+        <div className="filter-container">
+          <h4>Filter By:</h4>
+          {generateLanguageSelections()}
+        </div>
+      </div>
+
       <table className="results-table">
         <thead>
           <tr>{TableHeaderLabel()}</tr>

@@ -17,9 +17,18 @@ const SearchBar = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.persist();
+    // reset search results
+    setSearchResults({
+      searchedTerm: "",
+      data: {
+        items: [],
+        incomplete_results: null,
+        total_count: null,
+      },
+    });
+
     let results = await callBackEnd(searchTerm);
     setSearchResults({ searchedTerm: searchTerm, data: results.data });
-    setSearchTerm("");
   };
 
   const callBackEnd = async (searchTerm) => {
@@ -47,6 +56,7 @@ const SearchBar = () => {
             value={searchTerm}
             placeholder="Search GitHub Engine"
             onChange={(event) => setSearchTerm(event.target.value)}
+            // onChange={(event) => newSearch(event.target.value)}
           />
           <button type="submit" form="searchForm" className="button">
             Search
