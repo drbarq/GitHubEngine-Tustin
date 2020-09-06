@@ -14,7 +14,7 @@ function App() {
         <h4>GitHub Engine</h4>
         <Switch>
           <Route path="/" component={Search} exact />
-          <Route path="/details" component={Details} />
+          <Route path="/details/:repoId" component={Details} />
           <Route component={Error} />
         </Switch>
 

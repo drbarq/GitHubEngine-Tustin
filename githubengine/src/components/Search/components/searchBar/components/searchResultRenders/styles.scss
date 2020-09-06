@@ -25,6 +25,10 @@
   }
   .results-table {
     width: 100%;
+    a {
+      display: inline;
+      width: 100%;
+    }
 
     tr:hover {
       cursor: pointer;

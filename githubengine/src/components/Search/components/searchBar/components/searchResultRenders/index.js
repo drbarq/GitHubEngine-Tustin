@@ -71,18 +71,17 @@ const SearchResultRenders = ({ searchResults, setSearchResults }) => {
   const TableDataRow = (items) => {
     return sort.filteredItems.map((repo, index) => {
       return (
-        <Link to="/details">
-          <tr
-            key={repo.id}
-            className="repoInformation-row"
-            // onClick={() => console.log(`clicked ${repo.id}`)}
-            // onClick={() => <Link to="/details" />}
-          >
-            <td>{repo.description}</td>
-            <td>{repo.score}</td>
-            <td>{repo.stargazers_count}</td>
-          </tr>
-        </Link>
+        <tr key={repo.id} className="repoInformation-row">
+          <td>
+            <Link to={`/details/${repo.id}`}>{repo.description}</Link>
+          </td>
+          <td>
+            <Link to={`/details/${repo.id}`}>{repo.score}</Link>
+          </td>
+          <td>
+            <Link to={`/details/${repo.id}`}>{repo.stargazers_count}</Link>
+          </td>
+        </tr>
       );
     });
   };
