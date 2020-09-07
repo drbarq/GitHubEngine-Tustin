@@ -10,7 +10,7 @@ function App() {
   const [searchedRepos, setSearchedRepos] = useState();
 
   return (
-    <div className="App-root">
+    <div className="App-root" data-test="component-app">
       <div className="App-container">
         <div className="title-header">GitHub Engine</div>
         <Switch>
