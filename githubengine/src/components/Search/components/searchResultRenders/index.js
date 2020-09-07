@@ -23,17 +23,6 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
     itemLanguages();
   }, []);
 
-  // const sortData = () => {
-  //   return sort.filteredItems.sort((a, b) => {
-  //     return a[sort.name] < b[sort.name] ? 1 : -1;
-  //   });
-  // };
-
-  // const updateCurrentSort = (atttributeName = sort.name) => {
-  //   sort.accend ? sortData() : sortData().reverse();
-  //   setSort({ ...sort, name: atttributeName, accend: !sort.accend });
-  // };
-
   const itemLanguages = () => {
     let languages = [];
     sort.filteredItems.forEach((repo) => {
@@ -44,72 +33,6 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
 
     setSort({ ...sort, languages });
   };
-
-  // const TableHeaderLabel = () => {
-  //   const repoAttributes = [
-  //     {
-  //       label: "Repo Description",
-  //       name: "description",
-  //     },
-  //     {
-  //       label: "Relevance",
-  //       name: "score",
-  //     },
-  //     {
-  //       label: "Stars",
-  //       name: "stargazers_count",
-  //     },
-  //   ];
-
-  //   return repoAttributes.map((atttribute, index) => {
-  //     let arrowDirection;
-
-  //     if (sort.accend && sort.name === atttribute.name) {
-  //       arrowDirection = <i className="fas fa-arrow-up"></i>;
-  //     } else if (!sort.accend && sort.name === atttribute.name) {
-  //       arrowDirection = <i className="fas fa-arrow-down"></i>;
-  //     }
-
-  //     return (
-  //       <th key={index} onClick={() => updateCurrentSort(atttribute.name)}>
-  //         {atttribute.label} {arrowDirection}
-  //       </th>
-  //     );
-  //   });
-  // };
-
-  // const TableDataRow = (items) => {
-  //   return sort.filteredItems.map((repo, index) => {
-  //     return (
-  //       <tr key={repo.id} className="repoInformation-row">
-  //         <td>
-  //           <Link
-  //             to={`/details/${repo.id}`}
-  //             onClick={() => setSearchedRepos(items)}
-  //           >
-  //             {repo.description}
-  //           </Link>
-  //         </td>
-  //         <td>
-  //           <Link
-  //             to={`/details/${repo.id}`}
-  //             onClick={() => setSearchedRepos(items)}
-  //           >
-  //             {repo.score}
-  //           </Link>
-  //         </td>
-  //         <td>
-  //           <Link
-  //             to={`/details/${repo.id}`}
-  //             onClick={() => setSearchedRepos(items)}
-  //           >
-  //             {repo.stargazers_count}
-  //           </Link>
-  //         </td>
-  //       </tr>
-  //     );
-  //   });
-  // };
 
   const generateLanguageSelections = () => {
     const handleSelection = (e) => {
