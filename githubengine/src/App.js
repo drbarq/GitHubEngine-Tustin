@@ -5,6 +5,7 @@ import "./App.scss";
 import Search from "./components/Search";
 import Details from "./components/Details";
 import Error from "./components/Details/components/ErrorScreen";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 /**
  * App functional component which holds the app structure
@@ -13,6 +14,11 @@ import Error from "./components/Details/components/ErrorScreen";
 
 function App() {
   const [searchedRepos, setSearchedRepos] = useState();
+
+  const { searchedTerm, data } = useStoreState((state) => state);
+  const { updateSearchedTerm } = useStoreActions((actions) => actions);
+
+  console.log(searchedTerm, "searchedTerm");
 
   return (
     <div className="App-root" data-test="component-app">
