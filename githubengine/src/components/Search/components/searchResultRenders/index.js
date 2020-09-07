@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "./styles.scss";
-import { Link } from "react-router-dom";
 
 import TableHeaderLabel from "./components/TableHeaderLabel";
 import TableDataRow from "./components/TableDataRow";
