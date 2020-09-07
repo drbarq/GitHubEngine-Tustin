@@ -9,6 +9,7 @@
 **Start the Redis cache**
 
 `cd server`
+
 `redis-server`
 
 > check redis is connected: should recieve PONG back
@@ -22,8 +23,11 @@
 **Start GitHub Engine**
 
 `cd ..`
+
 `cd githubengine`
+
 `npm start`
 
 **Run tests for GitHub Engine**
+
 `npm test`
