@@ -3,6 +3,9 @@ import Enzyme, { shallow, ShallowWrapper, mount } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
 import Search from "./index";
 
+import { searchModel } from "../../store";
+import { createStore, StoreProvider } from "easy-peasy";
+
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 /**
@@ -16,7 +19,15 @@ const findByTestAttr = (wrapper, val) => {
 };
 
 test("renders search bar component without error", () => {
+  const store = createStore(searchModel);
   const wrapper = shallow(<Search />);
+
+  const app = (
+    <StoreProvider store={store}>
+      <wrapper />
+    </StoreProvider>
+  );
+
   const searchComponent = findByTestAttr(wrapper, "component-searchBar");
   expect(searchComponent.length).toBe(1);
 });

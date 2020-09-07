@@ -46,4 +46,4 @@ const searchModel = {
 
 const store = createStore(searchModel);
 
-export default store;
+export default { store, searchModel };
