@@ -21,12 +21,9 @@ let gitHubHeaders = {
 
 /**
 Limitations on query length
-
 The Search API does not support queries that:
-
     are longer than 256 characters (not including operators or qualifiers).
     have more than five AND, OR, or NOT operators.
-
 These search queries will return a "Validation failed" error message.
  */
 

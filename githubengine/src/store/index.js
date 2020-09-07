@@ -1,5 +1,9 @@
 import { createStore, action, thunk } from "easy-peasy";
 
+/**
+ * searchModel store: contains the global state and dispatched actions to update
+ */
+
 const searchModel = {
   searchedTerm: "",
   data: {

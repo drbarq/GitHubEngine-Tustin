@@ -23,7 +23,7 @@ const Details = () => {
   }
 
   /**
-   * function to locate the repo by param - repoId
+   * function to locate the repo by param - repoId in the store
    */
   const repo = items.find((repos) => {
     return repos.id === Number(repoId);
