@@ -30,40 +30,20 @@ The Search API does not support queries that:
 These search queries will return a "Validation failed" error message.
  */
 
-// console log to check if server running
-
-// app.listen(port, () => console.log(`Listening on Port ${port}`));
-
-// GET route
-// app.get("/express_backend", (req, res) => {
-//   res.send({ express: "your express backend is connected to react" });
-// });
-
 let gitHubHeaders = {
   "Access-Control-Allow-Origin": "*",
   Accept: "application/vnd.github.mercy-preview+json",
 };
 
-// app.get("/searchGitHub/:searchTerm", async (req, res) => {
-//   const { searchTerm } = req.params;
-//   let gitHubSearchURL = `https://api.github.com/search/repositories?q=${searchTerm}`;
-//   const result = await axios.get(gitHubSearchURL, gitHubHeaders);
-
-//   if (res.status(200)) {
-//     return res.send({ status: result.status, data: result.data });
-//   } else {
-//     res.send({
-//       status: result.status,
-//       message: result.statusText,
-//       resError: res.error,
-//     });
-//   }
-// });
+/**
+ * Route which checks the redis cache first before hitting the github api
+ */
 
 app.get("/searchGitHub/:searchTerm", async (req, res) => {
   try {
     const { searchTerm } = req.params;
     client.get(searchTerm, async (err, results) => {
+      // first check the cache
       if (results) {
         return res.status(200).send({
           error: false,
@@ -71,10 +51,10 @@ app.get("/searchGitHub/:searchTerm", async (req, res) => {
           data: JSON.parse(results),
         });
       } else {
-        // when its not found, hit the api
+        // if not found in cache, hit the api
         let gitHubSearchURL = `https://api.github.com/search/repositories?q=${searchTerm}`;
         const result = await axios.get(gitHubSearchURL, gitHubHeaders);
-        //   save record
+        //   save record to cache
         client.setex(searchTerm, 1440, JSON.stringify(result.data));
 
         return res.status(200).send({
