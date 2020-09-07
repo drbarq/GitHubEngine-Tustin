@@ -5,8 +5,6 @@ import SearchResultRenders from "./components/searchResultRenders";
 
 /**
  * Functional component which renders the Search bar and app functionality
- * @param {function} setSearchedRepos - setter function to update parent state with
- * repo information
  * @returns -  Search component which controls search results after response has been answered
  */
 const SearchBar = () => {
