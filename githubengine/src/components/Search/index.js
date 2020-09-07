@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./styles.scss";
-
+import { useStoreState, useStoreActions } from "easy-peasy";
 import SearchResultRenders from "./components/searchResultRenders";
 
 /**
@@ -20,6 +20,11 @@ const SearchBar = ({ setSearchedRepos }) => {
       total_count: null,
     },
   });
+
+  const { searchedTerm, data } = useStoreState((state) => state);
+  const { updateSearchedTerm, updateDataObject } = useStoreActions(
+    (actions) => actions
+  );
 
   /**
    * handleSubmit function for search button, persist and prevent rerender
@@ -43,6 +48,7 @@ const SearchBar = ({ setSearchedRepos }) => {
     });
 
     let results = await callBackEnd(searchTerm);
+    updateDataObject({ searchedTerm: searchTerm, data: results.data });
     setSearchResults({ searchedTerm: searchTerm, data: results.data });
   };
 
@@ -62,6 +68,16 @@ const SearchBar = ({ setSearchedRepos }) => {
       return body;
     }
   };
+  // const callBackEnd = async (searchTerm) => {
+  //   const response = await fetch(`/searchGitHub/${searchTerm}`);
+  //   const body = await response.json();
+
+  //   if (response.status !== 200) {
+  //     throw Error(body.message);
+  //   } else {
+  //     return body;
+  //   }
+  // };
 
   return (
     <div className="searchBar-container" data-test="component-searchBar">

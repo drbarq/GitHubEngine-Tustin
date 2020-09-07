@@ -10,7 +10,7 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
     data: { items },
   } = searchResults;
 
-  console.log("searchResults", searchResults);
+  // console.log("searchResults", searchResults);
 
   const [sort, setSort] = useState({
     name: "score",

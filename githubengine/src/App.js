@@ -18,7 +18,7 @@ function App() {
   const { searchedTerm, data } = useStoreState((state) => state);
   const { updateSearchedTerm } = useStoreActions((actions) => actions);
 
-  console.log(searchedTerm, "searchedTerm");
+  // console.log(searchedTerm, "searchedTerm");
 
   return (
     <div className="App-root" data-test="component-app">

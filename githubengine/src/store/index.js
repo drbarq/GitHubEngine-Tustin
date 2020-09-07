@@ -1,4 +1,4 @@
-import { createStore, action } from "easy-peasy";
+import { createStore, action, thunk, debug } from "easy-peasy";
 
 const productsModel = {
   items: {
@@ -25,8 +25,27 @@ const searchModel = {
     incomplete_results: null,
     total_count: null,
   },
+  errors: null,
   updateSearchedTerm: action((state, payload) => {
     state.searchedTerm = payload;
+  }),
+  callBackEnd: thunk(async (actions, payload, { getState }) => {
+    const response = await fetch(`/searchGitHub/${payload}`);
+    const body = await response.json();
+    if (response.status !== 200) {
+      actions.updateErrorMessage(body.message);
+      throw Error(body.message);
+    } else {
+      actions.updateDataObject(body);
+    }
+  }),
+  updateDataObject: action((state, payload) => {
+    state.searchedTerm = payload.searchedTerm;
+    state.data = payload.data;
+    console.log(debug(payload));
+  }),
+  updateErrorMessage: action((state, payload) => {
+    state.errors = payload;
   }),
 };
 
