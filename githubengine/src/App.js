@@ -12,7 +12,9 @@ function App() {
   return (
     <div className="App-root" data-test="component-app">
       <div className="App-container">
-        <div className="title-header">GitHub Engine</div>
+        <div className="title-header" data-test="component-app-title">
+          GitHub Engine
+        </div>
         <Switch>
           <Route
             path="/"

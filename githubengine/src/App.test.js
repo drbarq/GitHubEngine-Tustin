@@ -21,3 +21,9 @@ test("renders without error", () => {
   const appComponent = findByTestAttr(wrapper, "component-app");
   expect(appComponent.length).toBe(1);
 });
+
+test("renders title", () => {
+  const wrapper = shallow(<App />);
+  const appTitle = findByTestAttr(wrapper, "component-app-title");
+  expect(appTitle.length).toBe(1);
+});
