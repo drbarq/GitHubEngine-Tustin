@@ -4,7 +4,6 @@ import App from "./App";
 import { MemoryRouter } from "react-router";
 import { findByTestAttr } from "./test/testUtils";
 import Search from "./components/Search";
-import Details from "./components/Details";
 import ErrorScreen from "./components/Details/components/ErrorScreen";
 import { store } from "./store";
 import { StoreProvider } from "easy-peasy";

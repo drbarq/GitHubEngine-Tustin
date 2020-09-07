@@ -4,10 +4,13 @@
  * @param {string} val - Value of data-test attribute for search
  * @returns {ShallowWrapper}
  */
-
 export const findByTestAttr = (wrapper, val) => {
   return wrapper.find(`[data-test="${val}"]`);
 };
+
+/**
+ * example repo object for mocking tests
+ */
 
 export const gihubItem = {
   created_at: "2013-05-24T16:15:54Z",

@@ -9,7 +9,6 @@ import SearchResultRenders from "./components/searchResultRenders";
  * repo information
  * @returns -  Search component which controls search results after response has been answered
  */
-
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const { data } = useStoreState((state) => state);
@@ -17,12 +16,10 @@ const SearchBar = () => {
 
   /**
    * handleSubmit function for search button, persist and prevent rerender
-   * clear out the local state for incoming data
    * call backend with new search term
-   * set state with new search data
+   * set state with new search data using dispatched action within callBackend
    * @param {object} event - event parameters
    */
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.persist();

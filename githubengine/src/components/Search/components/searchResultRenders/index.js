@@ -4,6 +4,10 @@ import { useStoreState } from "easy-peasy";
 import TableHeaderLabel from "./components/TableHeaderLabel";
 import TableDataRow from "./components/TableDataRow";
 
+/**
+ * Functional component which renders the results from the search
+ * uses global state for searched term and result information from api call
+ */
 const SearchResultRenders = () => {
   const {
     searchedTerm,
@@ -20,9 +24,8 @@ const SearchResultRenders = () => {
 
   /**
    * useEffect call to compile list of unique languages on render
-   * reset the local state and update the items to render
+   * resets the local state and updates when items changes
    */
-
   useEffect(() => {
     let languages = [];
     items.forEach((repo) => {
@@ -39,7 +42,18 @@ const SearchResultRenders = () => {
     });
   }, [items]);
 
+  /**
+   * component which dynamically renders the drop down selection element
+   * Allows user to filter repo results by available languages
+   * Sets local state values for selected language and filtered repos by language
+   * @returns - select element to enable lanaguage filter selection
+   */
   const generateLanguageSelections = () => {
+    /**
+     * handleSelection
+     * @param {object} e - event properties of drop down selection
+     * Creates languageFiltered array of repos which match the language selected
+     */
     const handleSelection = (e) => {
       let languageSelected = e.target.value;
 
@@ -57,12 +71,18 @@ const SearchResultRenders = () => {
       });
     };
 
+    /**
+     * Starting array for languageSelections with 'all' loaded
+     */
     let languageSelections = [
       <option key="all" value="all">
         All
       </option>,
     ];
 
+    /**
+     * function to generate available language selections based on current repo results
+     */
     sort.languages.forEach((language, index) => {
       languageSelections.push(
         <option key={index} value={language}>
