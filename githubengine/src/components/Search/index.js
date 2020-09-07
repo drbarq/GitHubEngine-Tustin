@@ -43,10 +43,11 @@ const SearchBar = ({ setSearchedRepos }) => {
   };
 
   return (
-    <div className="searchBar-container">
+    <div className="searchBar-container" data-test="component-searchBar">
       <div className="form-container">
         <form id="searchForm" onSubmit={handleSubmit} className="form">
           <input
+            data-test="component-searchInput"
             id="searchTerm"
             name="searchTerm"
             required

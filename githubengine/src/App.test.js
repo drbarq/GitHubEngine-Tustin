@@ -16,7 +16,6 @@ Enzyme.configure({ adapter: new EnzymeAdapter() });
  * @param {string} val - Value of data-test attribute for search
  * @returns {ShallowWrapper}
  */
-
 const findByTestAttr = (wrapper, val) => {
   return wrapper.find(`[data-test="${val}"]`);
 };
@@ -39,15 +38,16 @@ test("should display Search page", () => {
       <App />
     </MemoryRouter>
   );
-
+  expect(wrapper.find(ErrorScreen)).toHaveLength(0);
   expect(wrapper.find(Search)).toHaveLength(1);
 });
+
 test("should display Error page", () => {
   const wrapper = mount(
     <MemoryRouter initialEntries={["/error"]}>
       <App />
     </MemoryRouter>
   );
-
+  expect(wrapper.find(Search)).toHaveLength(0);
   expect(wrapper.find(ErrorScreen)).toHaveLength(1);
 });
