@@ -1,7 +1,12 @@
 import React from "react";
-import Enzyme, { shallow, ShallowWrapper } from "enzyme";
+import Enzyme, { shallow, ShallowWrapper, mount } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
 import App from "./App";
+import { MemoryRouter } from "react-router";
+
+import Search from "./components/Search";
+import Details from "./components/Details";
+import ErrorScreen from "./components/Details/components/ErrorScreen";
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
@@ -26,4 +31,23 @@ test("renders title", () => {
   const wrapper = shallow(<App />);
   const appTitle = findByTestAttr(wrapper, "component-app-title");
   expect(appTitle.length).toBe(1);
+});
+
+test("should display Search page", () => {
+  const wrapper = mount(
+    <MemoryRouter initialEntries={["/"]}>
+      <App />
+    </MemoryRouter>
+  );
+
+  expect(wrapper.find(Search)).toHaveLength(1);
+});
+test("should display Error page", () => {
+  const wrapper = mount(
+    <MemoryRouter initialEntries={["/error"]}>
+      <App />
+    </MemoryRouter>
+  );
+
+  expect(wrapper.find(ErrorScreen)).toHaveLength(1);
 });
