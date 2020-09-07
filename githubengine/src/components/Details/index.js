@@ -1,10 +1,9 @@
 import React from "react";
 import "./styles.scss";
 import ErrorScreen from "./components/ErrorScreen";
-import { useStoreState, useStoreActions } from "easy-peasy";
+import { useStoreState } from "easy-peasy";
 
 import { useParams, Link } from "react-router-dom";
-// const Details = ({ searchedRepos }) => {
 const Details = () => {
   const { repoId } = useParams();
   const {
@@ -19,9 +18,6 @@ const Details = () => {
   const repo = items.find((repos) => {
     return repos.id === Number(repoId);
   });
-  // const repo = searchedRepos.find((repos) => {
-  //   return repos.id === Number(repoId);
-  // });
 
   let {
     name,
