@@ -10,7 +10,7 @@ const Details = () => {
     data: { items },
   } = useStoreState((state) => state);
 
-  if (items === undefined) {
+  if (items.length === 0) {
     return <ErrorScreen />;
   }
 
@@ -32,7 +32,7 @@ const Details = () => {
   } = repo;
 
   return (
-    <div className="Details-container">
+    <div className="Details-container" data-test="component-details">
       <div className="headerLink-container">
         <Link to="/">
           <div className="navContainer">
