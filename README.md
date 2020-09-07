@@ -31,3 +31,7 @@
 **Run tests for GitHub Engine**
 
 `npm test`
+
+## Project Structure
+
+Project is built using: React / JavaScript / Scss / Jest / Enzyme / Node / Redis
