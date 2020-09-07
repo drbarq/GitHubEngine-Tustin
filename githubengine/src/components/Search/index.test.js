@@ -3,8 +3,9 @@ import Enzyme, { shallow, ShallowWrapper, mount } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
 import Search from "./index";
 
-import { searchModel } from "../../store";
+import { searchModel, store } from "../../store";
 import { createStore, StoreProvider } from "easy-peasy";
+import SearchResultRenders from "./components/searchResultRenders";
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
@@ -18,36 +19,37 @@ const findByTestAttr = (wrapper, val) => {
   return wrapper.find(`[data-test="${val}"]`);
 };
 
-test("renders search bar component without error", () => {
-  const store = createStore(searchModel);
-  const wrapper = shallow(<Search />);
-
-  const app = (
+const setup = () => {
+  return mount(
     <StoreProvider store={store}>
-      <wrapper />
+      <Search />
     </StoreProvider>
   );
+};
 
+test("renders search bar component without error", () => {
+  const wrapper = setup();
   const searchComponent = findByTestAttr(wrapper, "component-searchBar");
   expect(searchComponent.length).toBe(1);
 });
 test("renders search bar input without error", () => {
-  const wrapper = shallow(<Search />);
+  const wrapper = setup();
   const searchComponent = findByTestAttr(wrapper, "component-searchInput");
   expect(searchComponent.length).toBe(1);
 });
-test("can type text in search input", () => {
-  const wrapper = shallow(<Search />);
-  const searchComponent = findByTestAttr(wrapper, "component-searchInput");
+// test("can type text in search input", () => {
+//   const wrapper = setup();
 
-  searchComponent.simulate("change", { target: { value: "react tetris" } });
+//   const searchComponent = findByTestAttr(wrapper, "component-searchInput");
 
-  console.log(searchComponent.debug());
-  //   expect(searchComponent.get().value).to.equal("react tetris");
-});
+//   searchComponent.simulate("change", { target: { value: "react tetris" } });
+
+//   console.log(searchComponent.debug());
+//   //   expect(searchComponent.get().value).to.equal("react tetris");
+// });
 
 test("renders search button", () => {
-  const wrapper = shallow(<Search />);
+  const wrapper = setup();
   const searchButton = findByTestAttr(wrapper, "search-button");
   expect(searchButton.length).toBe(1);
 });

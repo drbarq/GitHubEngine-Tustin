@@ -6,7 +6,7 @@ import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 
 import { StoreProvider } from "easy-peasy";
-import store from "./store";
+import { store } from "./store";
 
 ReactDOM.render(
   <React.StrictMode>
