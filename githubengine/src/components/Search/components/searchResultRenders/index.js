@@ -3,6 +3,7 @@ import "./styles.scss";
 import { Link } from "react-router-dom";
 
 import TableHeaderLabel from "./components/TableHeaderLabel";
+import TableDataRow from "./components/TableDataRow";
 
 const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
   let {
@@ -77,38 +78,38 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
   //   });
   // };
 
-  const TableDataRow = (items) => {
-    return sort.filteredItems.map((repo, index) => {
-      return (
-        <tr key={repo.id} className="repoInformation-row">
-          <td>
-            <Link
-              to={`/details/${repo.id}`}
-              onClick={() => setSearchedRepos(items)}
-            >
-              {repo.description}
-            </Link>
-          </td>
-          <td>
-            <Link
-              to={`/details/${repo.id}`}
-              onClick={() => setSearchedRepos(items)}
-            >
-              {repo.score}
-            </Link>
-          </td>
-          <td>
-            <Link
-              to={`/details/${repo.id}`}
-              onClick={() => setSearchedRepos(items)}
-            >
-              {repo.stargazers_count}
-            </Link>
-          </td>
-        </tr>
-      );
-    });
-  };
+  // const TableDataRow = (items) => {
+  //   return sort.filteredItems.map((repo, index) => {
+  //     return (
+  //       <tr key={repo.id} className="repoInformation-row">
+  //         <td>
+  //           <Link
+  //             to={`/details/${repo.id}`}
+  //             onClick={() => setSearchedRepos(items)}
+  //           >
+  //             {repo.description}
+  //           </Link>
+  //         </td>
+  //         <td>
+  //           <Link
+  //             to={`/details/${repo.id}`}
+  //             onClick={() => setSearchedRepos(items)}
+  //           >
+  //             {repo.score}
+  //           </Link>
+  //         </td>
+  //         <td>
+  //           <Link
+  //             to={`/details/${repo.id}`}
+  //             onClick={() => setSearchedRepos(items)}
+  //           >
+  //             {repo.stargazers_count}
+  //           </Link>
+  //         </td>
+  //       </tr>
+  //     );
+  //   });
+  // };
 
   const generateLanguageSelections = () => {
     const handleSelection = (e) => {
@@ -165,7 +166,13 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
             <TableHeaderLabel sort={sort} setSort={setSort} />
           </tr>
         </thead>
-        <tbody>{TableDataRow(items)}</tbody>
+        <tbody>
+          <TableDataRow
+            items={items}
+            setSearchedRepos={setSearchedRepos}
+            sort={sort}
+          />
+        </tbody>
       </table>
     </div>
   );
