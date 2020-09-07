@@ -20,17 +20,24 @@ const SearchResultRenders = () => {
 
   /**
    * useEffect call to compile list of unique languages on render
+   * reset the local state and update the items to render
    */
-  useEffect((sort) => {
+
+  useEffect(() => {
     let languages = [];
-    sort.filteredItems.forEach((repo) => {
+    items.forEach((repo) => {
       return languages.includes(repo.language)
         ? null
         : languages.push(repo.language);
     });
-
-    setSort({ ...sort, languages });
-  }, []);
+    setSort({
+      name: "score",
+      accend: null,
+      filterLanguage: "all",
+      languages,
+      filteredItems: items,
+    });
+  }, [items]);
 
   const generateLanguageSelections = () => {
     const handleSelection = (e) => {
