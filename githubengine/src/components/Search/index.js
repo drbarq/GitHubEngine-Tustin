@@ -49,7 +49,7 @@ const SearchBar = ({ setSearchedRepos }) => {
 
     let results = await callBackEnd(searchTerm);
     // updateDataObject({ searchedTerm: searchTerm, data: results.data });
-    setSearchResults({ searchedTerm: searchTerm, data: results.data });
+    // setSearchResults({ searchedTerm: searchTerm, data: results.data });
   };
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -122,10 +122,11 @@ const SearchBar = ({ setSearchedRepos }) => {
           </button>
         </form>
       </div>
-      {searchResults.data.items.length > 0 ? (
+      {/* {searchResults.data.items.length > 0 ? ( */}
+      {data.items.length > 0 ? (
         <SearchResultRenders
-          searchResults={searchResults}
-          setSearchedRepos={setSearchedRepos}
+        // searchResults={searchResults}
+        // setSearchedRepos={setSearchedRepos}
         />
       ) : (
         ""

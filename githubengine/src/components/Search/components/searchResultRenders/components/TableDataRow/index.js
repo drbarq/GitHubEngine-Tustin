@@ -2,13 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const TableDataRow = ({ items, setSearchedRepos, sort }) => {
+  // const TableDataRow = ({ items }) => {
   return sort.filteredItems.map((repo, index) => {
     return (
       <tr key={repo.id} className="repoInformation-row">
         <td>
           <Link
             to={`/details/${repo.id}`}
-            onClick={() => setSearchedRepos(items)}
+            // onClick={() => setSearchedRepos(items)}
           >
             {repo.description}
           </Link>
@@ -16,7 +17,7 @@ const TableDataRow = ({ items, setSearchedRepos, sort }) => {
         <td>
           <Link
             to={`/details/${repo.id}`}
-            onClick={() => setSearchedRepos(items)}
+            // onClick={() => setSearchedRepos(items)}
           >
             {repo.score}
           </Link>
@@ -24,7 +25,7 @@ const TableDataRow = ({ items, setSearchedRepos, sort }) => {
         <td>
           <Link
             to={`/details/${repo.id}`}
-            onClick={() => setSearchedRepos(items)}
+            // onClick={() => setSearchedRepos(items)}
           >
             {repo.stargazers_count}
           </Link>

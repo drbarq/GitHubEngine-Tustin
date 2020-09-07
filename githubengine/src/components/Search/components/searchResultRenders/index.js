@@ -3,12 +3,19 @@ import "./styles.scss";
 
 import TableHeaderLabel from "./components/TableHeaderLabel";
 import TableDataRow from "./components/TableDataRow";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
-const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
-  let {
+// const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
+const SearchResultRenders = () => {
+  // let {
+  //   searchedTerm,
+  //   data: { items },
+  // } = searchResults;
+
+  const {
     searchedTerm,
     data: { items },
-  } = searchResults;
+  } = useStoreState((state) => state);
 
   // console.log("searchResults", searchResults);
 
@@ -96,7 +103,7 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
         <tbody>
           <TableDataRow
             items={items}
-            setSearchedRepos={setSearchedRepos}
+            // setSearchedRepos={setSearchedRepos}
             sort={sort}
           />
         </tbody>

@@ -26,6 +26,7 @@ const searchModel = {
     total_count: null,
   },
   errors: null,
+  serverMessage: "",
   updateSearchedTerm: action((state, payload) => {
     state.searchedTerm = payload;
   }),
@@ -40,6 +41,7 @@ const searchModel = {
       throw Error(result.message);
     } else {
       actions.updateDataObject(result);
+      actions.updateServerMessage(result.message);
     }
     return result;
   }),
@@ -52,6 +54,9 @@ const searchModel = {
   }),
   updateErrorMessage: action((state, payload) => {
     state.errors = payload;
+  }),
+  updateServerMessage: action((state, payload) => {
+    state.serverMessage = payload;
   }),
 };
 

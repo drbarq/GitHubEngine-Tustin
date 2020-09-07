@@ -1,18 +1,27 @@
 import React from "react";
 import "./styles.scss";
 import ErrorScreen from "./components/ErrorScreen";
+import { useStoreState, useStoreActions } from "easy-peasy";
 
 import { useParams, Link } from "react-router-dom";
-const Details = ({ searchedRepos }) => {
+// const Details = ({ searchedRepos }) => {
+const Details = () => {
   const { repoId } = useParams();
+  const {
+    searchedTerm,
+    data: { items },
+  } = useStoreState((state) => state);
 
-  if (searchedRepos === undefined) {
+  if (items === undefined) {
     return <ErrorScreen />;
   }
 
-  const repo = searchedRepos.find((repos) => {
+  const repo = items.find((repos) => {
     return repos.id === Number(repoId);
   });
+  // const repo = searchedRepos.find((repos) => {
+  //   return repos.id === Number(repoId);
+  // });
 
   let {
     name,
