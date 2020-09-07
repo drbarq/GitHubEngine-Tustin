@@ -7,16 +7,20 @@
 > Available Scripts
 
 **Start the Redis cache**
+
 `cd server`
 `redis-server`
 
 > check redis is connected: should recieve PONG back
-> `redis-cli ping`
+
+`redis-cli ping`
 
 **Start the server**
+
 `nodemon server.js`
 
 **Start GitHub Engine**
+
 `cd ..`
 `cd githubengine`
 `npm start`
