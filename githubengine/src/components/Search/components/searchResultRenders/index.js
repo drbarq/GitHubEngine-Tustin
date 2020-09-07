@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./styles.scss";
 import { Link } from "react-router-dom";
 
+import TableHeaderLabel from "./components/TableHeaderLabel";
+
 const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
   let {
     searchedTerm,
@@ -20,16 +22,16 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
     itemLanguages();
   }, []);
 
-  const sortData = () => {
-    return sort.filteredItems.sort((a, b) => {
-      return a[sort.name] < b[sort.name] ? 1 : -1;
-    });
-  };
+  // const sortData = () => {
+  //   return sort.filteredItems.sort((a, b) => {
+  //     return a[sort.name] < b[sort.name] ? 1 : -1;
+  //   });
+  // };
 
-  const updateCurrentSort = (atttributeName = sort.name) => {
-    sort.accend ? sortData() : sortData().reverse();
-    setSort({ ...sort, name: atttributeName, accend: !sort.accend });
-  };
+  // const updateCurrentSort = (atttributeName = sort.name) => {
+  //   sort.accend ? sortData() : sortData().reverse();
+  //   setSort({ ...sort, name: atttributeName, accend: !sort.accend });
+  // };
 
   const itemLanguages = () => {
     let languages = [];
@@ -42,42 +44,38 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
     setSort({ ...sort, languages });
   };
 
-  // useEffect(() => {
-  //   updateCurrentSort();
-  // }, [sort.name]);
+  // const TableHeaderLabel = () => {
+  //   const repoAttributes = [
+  //     {
+  //       label: "Repo Description",
+  //       name: "description",
+  //     },
+  //     {
+  //       label: "Relevance",
+  //       name: "score",
+  //     },
+  //     {
+  //       label: "Stars",
+  //       name: "stargazers_count",
+  //     },
+  //   ];
 
-  const TableHeaderLabel = () => {
-    const repoAttributes = [
-      {
-        label: "Repo Description",
-        name: "description",
-      },
-      {
-        label: "Relevance",
-        name: "score",
-      },
-      {
-        label: "Stars",
-        name: "stargazers_count",
-      },
-    ];
+  //   return repoAttributes.map((atttribute, index) => {
+  //     let arrowDirection;
 
-    return repoAttributes.map((atttribute, index) => {
-      let arrowDirection;
+  //     if (sort.accend && sort.name === atttribute.name) {
+  //       arrowDirection = <i className="fas fa-arrow-up"></i>;
+  //     } else if (!sort.accend && sort.name === atttribute.name) {
+  //       arrowDirection = <i className="fas fa-arrow-down"></i>;
+  //     }
 
-      if (sort.accend && sort.name === atttribute.name) {
-        arrowDirection = <i className="fas fa-arrow-up"></i>;
-      } else if (!sort.accend && sort.name === atttribute.name) {
-        arrowDirection = <i className="fas fa-arrow-down"></i>;
-      }
-
-      return (
-        <th key={index} onClick={() => updateCurrentSort(atttribute.name)}>
-          {atttribute.label} {arrowDirection}
-        </th>
-      );
-    });
-  };
+  //     return (
+  //       <th key={index} onClick={() => updateCurrentSort(atttribute.name)}>
+  //         {atttribute.label} {arrowDirection}
+  //       </th>
+  //     );
+  //   });
+  // };
 
   const TableDataRow = (items) => {
     return sort.filteredItems.map((repo, index) => {
@@ -163,7 +161,9 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
 
       <table className="results-table">
         <thead>
-          <tr>{TableHeaderLabel()}</tr>
+          <tr>
+            <TableHeaderLabel sort={sort} setSort={setSort} />
+          </tr>
         </thead>
         <tbody>{TableDataRow(items)}</tbody>
       </table>

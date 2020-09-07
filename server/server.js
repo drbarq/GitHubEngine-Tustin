@@ -8,16 +8,16 @@ const app = express();
 const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(logger("dev"));
-
-const gitHubRepoSearchURL = "https://api.github.com/search/repositories";
-// header: { Accept: application/vnd.github.mercy-preview+json}
-
-// make a connection to the local instance of redis
 const client = redis.createClient(6379);
 
 client.on("error", (error) => {
   console.error(error);
 });
+
+let gitHubHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  Accept: "application/vnd.github.mercy-preview+json",
+};
 
 /**
 Limitations on query length
@@ -30,15 +30,9 @@ The Search API does not support queries that:
 These search queries will return a "Validation failed" error message.
  */
 
-let gitHubHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  Accept: "application/vnd.github.mercy-preview+json",
-};
-
 /**
  * Route which checks the redis cache first before hitting the github api
  */
-
 app.get("/searchGitHub/:searchTerm", async (req, res) => {
   try {
     const { searchTerm } = req.params;
