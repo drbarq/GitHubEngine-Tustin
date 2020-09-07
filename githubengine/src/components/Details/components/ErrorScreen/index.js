@@ -2,6 +2,11 @@ import React from "react";
 import "./styles.scss";
 import { Link } from "react-router-dom";
 
+/**
+ * ErrorScreen functional component which renders if there is a routing error
+ * @returns - container element instructing user to head back || home
+ */
+
 const ErrorScreen = () => {
   return (
     <div className="error-container">

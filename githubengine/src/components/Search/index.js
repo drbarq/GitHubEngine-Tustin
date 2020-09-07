@@ -16,7 +16,7 @@ const SearchBar = () => {
    * handleSubmit function for search button, persist and prevent rerender
    * call backend with new search term
    * set state with new search data using dispatched action within callBackend
-   * @param {object} event - event parameters
+   * @param {object} event - event object
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +51,6 @@ const SearchBar = () => {
           </button>
         </form>
       </div>
-      {/* {searchResults.data.items.length > 0 ? ( */}
       {data.items.length > 0 ? <SearchResultRenders /> : ""}
       {data.total_count === 0 ? (
         <div>You have yourself a good idea, no repos match those terms</div>
