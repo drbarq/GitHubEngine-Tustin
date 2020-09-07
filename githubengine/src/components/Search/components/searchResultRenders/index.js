@@ -10,6 +10,8 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
     data: { items },
   } = searchResults;
 
+  console.log("searchResults", searchResults);
+
   const [sort, setSort] = useState({
     name: "score",
     accend: null,
@@ -73,7 +75,10 @@ const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
   };
 
   return (
-    <div className="SearchResultsRender-container">
+    <div
+      className="SearchResultsRender-container"
+      data-test="component-search-results"
+    >
       <div className="header-container">
         <h1>Searched Term: {searchedTerm}</h1>
         <div className="filter-container">

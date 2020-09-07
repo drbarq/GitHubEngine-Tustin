@@ -6,6 +6,11 @@ import Search from "./components/Search";
 import Details from "./components/Details";
 import Error from "./components/Details/components/ErrorScreen";
 
+/**
+ * App functional component which holds the app structure
+ * @returns - parent container elements and router logic to display approprate information
+ */
+
 function App() {
   const [searchedRepos, setSearchedRepos] = useState();
 

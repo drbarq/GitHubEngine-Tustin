@@ -2,7 +2,6 @@ import React from "react";
 import Enzyme, { shallow, ShallowWrapper, mount } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
 import Search from "./index";
-import SearchResultRenders from "./components/searchResultRenders";
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
