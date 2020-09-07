@@ -20,6 +20,7 @@ let gitHubHeaders = {
 };
 
 /**
+ * GitHub API Query constraints
 Limitations on query length
 The Search API does not support queries that:
     are longer than 256 characters (not including operators or qualifiers).
@@ -28,7 +29,10 @@ These search queries will return a "Validation failed" error message.
  */
 
 /**
- * Route which checks the redis cache first before hitting the github api
+ * Express server using redis cache
+ * Single route service which first checks the redis cache before making
+ * the external API call.  Results from the external request are stored within the cache.
+ * Cache is cleared every 1440 seconds (24 mins)
  */
 app.get("/searchGitHub/:searchTerm", async (req, res) => {
   try {
@@ -59,6 +63,10 @@ app.get("/searchGitHub/:searchTerm", async (req, res) => {
     console.log(error);
   }
 });
+
+/**
+ * Once server is running, displays message in terminal indicating the inuse port
+ */
 
 app.listen(port, () => {
   console.log(`Server running on ${port}`);
