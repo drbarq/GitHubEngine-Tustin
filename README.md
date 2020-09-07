@@ -6,6 +6,10 @@
 
 > Available Scripts
 
+**Install Dependencies**
+
+`npm install`
+
 **Start the Redis cache**
 
 `cd server`
