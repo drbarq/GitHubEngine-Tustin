@@ -1,12 +1,9 @@
 import React from "react";
-import Enzyme, { shallow, ShallowWrapper, mount } from "enzyme";
-import EnzymeAdapter from "enzyme-adapter-react-16";
+import { mount } from "enzyme";
 import SearchResultRenders from "./index";
-
+import { findByTestAttr } from "../../../../test/testUtils";
 import { store } from "../../../../store/";
 import { StoreProvider } from "easy-peasy";
-
-Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 // const defaultProps = {
 //     searchedTerm: 'react',
@@ -101,16 +98,6 @@ Enzyme.configure({ adapter: new EnzymeAdapter() });
 //         total_count: 1577271
 //     }
 // }
-
-/**
- * Return ShallowWrapper containing node(s) with the given data-test value
- * @param {ShallowWrapper} wrapper - Enzyme shallow wrapper to search within
- * @param {string} val - Value of data-test attribute for search
- * @returns {ShallowWrapper}
- */
-const findByTestAttr = (wrapper, val) => {
-  return wrapper.find(`[data-test="${val}"]`);
-};
 
 const setup = () => {
   return mount(

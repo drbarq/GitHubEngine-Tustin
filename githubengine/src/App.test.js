@@ -1,26 +1,13 @@
 import React from "react";
-import Enzyme, { shallow, ShallowWrapper, mount } from "enzyme";
-import EnzymeAdapter from "enzyme-adapter-react-16";
+import { shallow, mount } from "enzyme";
 import App from "./App";
 import { MemoryRouter } from "react-router";
-
+import { findByTestAttr } from "./test/testUtils";
 import Search from "./components/Search";
 import Details from "./components/Details";
 import ErrorScreen from "./components/Details/components/ErrorScreen";
 import { store } from "./store";
 import { StoreProvider } from "easy-peasy";
-
-Enzyme.configure({ adapter: new EnzymeAdapter() });
-
-/**
- * Return ShallowWrapper containing node(s) with the given data-test value
- * @param {ShallowWrapper} wrapper - Enzyme shallow wrapper to search within
- * @param {string} val - Value of data-test attribute for search
- * @returns {ShallowWrapper}
- */
-const findByTestAttr = (wrapper, val) => {
-  return wrapper.find(`[data-test="${val}"]`);
-};
 
 test("renders without error", () => {
   const wrapper = shallow(<App />);

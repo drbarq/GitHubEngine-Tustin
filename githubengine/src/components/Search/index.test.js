@@ -1,22 +1,9 @@
 import React from "react";
-import Enzyme, { shallow, ShallowWrapper, mount } from "enzyme";
-import EnzymeAdapter from "enzyme-adapter-react-16";
+import { mount } from "enzyme";
 import Search from "./index";
-
+import { findByTestAttr } from "../../test/testUtils";
 import { store } from "../../store";
 import { StoreProvider } from "easy-peasy";
-
-Enzyme.configure({ adapter: new EnzymeAdapter() });
-
-/**
- * Return ShallowWrapper containing node(s) with the given data-test value
- * @param {ShallowWrapper} wrapper - Enzyme shallow wrapper to search within
- * @param {string} val - Value of data-test attribute for search
- * @returns {ShallowWrapper}
- */
-const findByTestAttr = (wrapper, val) => {
-  return wrapper.find(`[data-test="${val}"]`);
-};
 
 const setup = () => {
   return mount(
@@ -36,6 +23,12 @@ test("renders search bar input without error", () => {
   const searchComponent = findByTestAttr(wrapper, "component-searchInput");
   expect(searchComponent.length).toBe(1);
 });
+test("renders search button", () => {
+  const wrapper = setup();
+  const searchButton = findByTestAttr(wrapper, "search-button");
+  expect(searchButton.length).toBe(1);
+});
+
 // test("can type text in search input", () => {
 //   const wrapper = setup();
 
@@ -46,9 +39,3 @@ test("renders search bar input without error", () => {
 //   console.log(searchComponent.debug());
 //   //   expect(searchComponent.get().value).to.equal("react tetris");
 // });
-
-test("renders search button", () => {
-  const wrapper = setup();
-  const searchButton = findByTestAttr(wrapper, "search-button");
-  expect(searchButton.length).toBe(1);
-});
