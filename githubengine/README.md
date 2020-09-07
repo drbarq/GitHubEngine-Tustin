@@ -4,6 +4,14 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+'npm start'
+'npm test'
+
+'nodemon server.js'
+
+'redis-server'
+'redis-cli ping'
+
 ### `yarn start`
 
 Runs the app in the development mode.<br />

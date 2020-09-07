@@ -3,6 +3,9 @@ import Enzyme, { shallow, ShallowWrapper, mount } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
 import SearchResultRenders from "./index";
 
+import { store } from "../../../../store/";
+import { StoreProvider } from "easy-peasy";
+
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
 // const defaultProps = {
@@ -109,8 +112,17 @@ const findByTestAttr = (wrapper, val) => {
   return wrapper.find(`[data-test="${val}"]`);
 };
 
+const setup = () => {
+  return mount(
+    <StoreProvider store={store}>
+      <SearchResultRenders />
+    </StoreProvider>
+  );
+};
+
 test("renders search results without error", () => {
-  const wrapper = shallow(<SearchResultRenders />);
+  const wrapper = setup();
+
   const searchResultRenders = findByTestAttr(
     wrapper,
     "component-search-results"
