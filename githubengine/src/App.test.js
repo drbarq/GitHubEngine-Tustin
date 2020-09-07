@@ -7,6 +7,8 @@ import { MemoryRouter } from "react-router";
 import Search from "./components/Search";
 import Details from "./components/Details";
 import ErrorScreen from "./components/Details/components/ErrorScreen";
+import { store } from "./store";
+import { StoreProvider } from "easy-peasy";
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
@@ -34,9 +36,11 @@ test("renders title", () => {
 
 test("should display Search page", () => {
   const wrapper = mount(
-    <MemoryRouter initialEntries={["/"]}>
-      <App />
-    </MemoryRouter>
+    <StoreProvider store={store}>
+      <MemoryRouter initialEntries={["/"]}>
+        <App />
+      </MemoryRouter>
+    </StoreProvider>
   );
   expect(wrapper.find(ErrorScreen)).toHaveLength(0);
   expect(wrapper.find(Search)).toHaveLength(1);

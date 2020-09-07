@@ -3,9 +3,8 @@ import Enzyme, { shallow, ShallowWrapper, mount } from "enzyme";
 import EnzymeAdapter from "enzyme-adapter-react-16";
 import Search from "./index";
 
-import { searchModel, store } from "../../store";
-import { createStore, StoreProvider } from "easy-peasy";
-import SearchResultRenders from "./components/searchResultRenders";
+import { store } from "../../store";
+import { StoreProvider } from "easy-peasy";
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
