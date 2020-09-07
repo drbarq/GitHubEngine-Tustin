@@ -29,7 +29,7 @@ These search queries will return a "Validation failed" error message.
  */
 
 /**
- * Express server using redis cache
+ * Node server using redis cache
  * Single route service which first checks the redis cache before making
  * the external API call.  Results from the external request are stored within the cache.
  * Cache is cleared every 1440 seconds (24 mins)
