@@ -37,3 +37,5 @@
 Project is built using: **[React](https://github.com/facebook/react)** / JavaScript / **[SCSS](https://sass-lang.com/)** / **[Jest](https://github.com/facebook/jest)** / **[Enzyme](https://github.com/enzymejs/enzyme)** / Node / **[Redis](https://github.com/NodeRedis/node-redis)**
 
 State management is handled by **[Easy Peasy](https://easy-peasy.now.sh/docs/quick-start.html)**
+
+**File Structure: Technical Folder Separation**
