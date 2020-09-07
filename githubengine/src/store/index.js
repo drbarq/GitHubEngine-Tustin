@@ -31,16 +31,22 @@ const searchModel = {
   }),
   callBackEnd: thunk(async (actions, payload, { getState }) => {
     const response = await fetch(`/searchGitHub/${payload}`);
-    const body = await response.json();
+    const result = await response.json();
+
+    actions.updateSearchedTerm(payload);
+
     if (response.status !== 200) {
-      actions.updateErrorMessage(body.message);
-      throw Error(body.message);
+      actions.updateErrorMessage(result.message);
+      throw Error(result.message);
     } else {
-      actions.updateDataObject(body);
+      actions.updateDataObject(result);
     }
+    return result;
+  }),
+  updateSearchedTerm: action((state, payload) => {
+    state.searchedTerm = payload;
   }),
   updateDataObject: action((state, payload) => {
-    state.searchedTerm = payload.searchedTerm;
     state.data = payload.data;
     console.log(debug(payload));
   }),

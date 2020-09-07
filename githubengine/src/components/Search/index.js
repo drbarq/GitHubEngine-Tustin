@@ -22,7 +22,7 @@ const SearchBar = ({ setSearchedRepos }) => {
   });
 
   const { searchedTerm, data } = useStoreState((state) => state);
-  const { updateSearchedTerm, updateDataObject } = useStoreActions(
+  const { updateSearchedTerm, updateDataObject, callBackEnd } = useStoreActions(
     (actions) => actions
   );
 
@@ -48,9 +48,26 @@ const SearchBar = ({ setSearchedRepos }) => {
     });
 
     let results = await callBackEnd(searchTerm);
-    updateDataObject({ searchedTerm: searchTerm, data: results.data });
+    // updateDataObject({ searchedTerm: searchTerm, data: results.data });
     setSearchResults({ searchedTerm: searchTerm, data: results.data });
   };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   e.persist();
+  //   // reset search results
+  //   setSearchResults({
+  //     searchedTerm: "",
+  //     data: {
+  //       items: [],
+  //       incomplete_results: null,
+  //       total_count: null,
+  //     },
+  //   });
+
+  //   let results = await callBackEnd(searchTerm);
+  //   updateDataObject({ searchedTerm: searchTerm, data: results.data });
+  //   setSearchResults({ searchedTerm: searchTerm, data: results.data });
+  // };
 
   /**
    * function which calls express backend to search cache and if needed
@@ -58,16 +75,16 @@ const SearchBar = ({ setSearchedRepos }) => {
    * @param {string} searchTerm - user inputed text for github search
    * @returns - the response from the api call
    */
-  const callBackEnd = async (searchTerm) => {
-    const response = await fetch(`/searchGitHub/${searchTerm}`);
-    const body = await response.json();
+  // const callBackEnd = async (searchTerm) => {
+  //   const response = await fetch(`/searchGitHub/${searchTerm}`);
+  //   const body = await response.json();
 
-    if (response.status !== 200) {
-      throw Error(body.message);
-    } else {
-      return body;
-    }
-  };
+  //   if (response.status !== 200) {
+  //     throw Error(body.message);
+  //   } else {
+  //     return body;
+  //   }
+  // };
   // const callBackEnd = async (searchTerm) => {
   //   const response = await fetch(`/searchGitHub/${searchTerm}`);
   //   const body = await response.json();
