@@ -35,3 +35,9 @@ test("can type text in search input", () => {
   console.log(searchComponent.debug());
   //   expect(searchComponent.get().value).to.equal("react tetris");
 });
+
+test("renders search button", () => {
+  const wrapper = shallow(<Search />);
+  const searchButton = findByTestAttr(wrapper, "search-button");
+  expect(searchButton.length).toBe(1);
+});

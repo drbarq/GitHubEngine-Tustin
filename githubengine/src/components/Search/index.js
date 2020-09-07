@@ -3,6 +3,13 @@ import "./styles.scss";
 
 import SearchResultRenders from "./components/searchResultRenders";
 
+/**
+ * Functional component which renders the Search bar and app functionality
+ * @param {function} setSearchedRepos - setter function to update parent state with
+ * repo information
+ * @returns -  Search component which controls search results after response has been answered
+ */
+
 const SearchBar = ({ setSearchedRepos }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState({
@@ -13,6 +20,14 @@ const SearchBar = ({ setSearchedRepos }) => {
       total_count: null,
     },
   });
+
+  /**
+   * handleSubmit function for search button, persist and prevent rerender
+   * clear out the local state for incoming data
+   * call backend with new search term
+   * set state with new search data
+   * @param {object} event - event parameters
+   */
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +46,12 @@ const SearchBar = ({ setSearchedRepos }) => {
     setSearchResults({ searchedTerm: searchTerm, data: results.data });
   };
 
+  /**
+   * function which calls express backend to search cache and if needed
+   * make hit external github API
+   * @param {string} searchTerm - user inputed text for github search
+   * @returns - the response from the api call
+   */
   const callBackEnd = async (searchTerm) => {
     const response = await fetch(`/searchGitHub/${searchTerm}`);
     const body = await response.json();
@@ -58,7 +79,12 @@ const SearchBar = ({ setSearchedRepos }) => {
             placeholder="Search GitHub Engine"
             onChange={(event) => setSearchTerm(event.target.value)}
           />
-          <button type="submit" form="searchForm" className="button">
+          <button
+            type="submit"
+            form="searchForm"
+            className="button"
+            data-test="search-button"
+          >
             Search
           </button>
         </form>
