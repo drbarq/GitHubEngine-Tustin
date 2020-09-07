@@ -7,6 +7,7 @@ import TableDataRow from "./components/TableDataRow";
 /**
  * Functional component which renders the results from the search
  * uses global state for searched term and result information from api call
+ * @returns - Data table with corresponding repo information
  */
 const SearchResultRenders = () => {
   const {

@@ -2,22 +2,36 @@ import React from "react";
 import "./styles.scss";
 import ErrorScreen from "./components/ErrorScreen";
 import { useStoreState } from "easy-peasy";
-
 import { useParams, Link } from "react-router-dom";
+
+/**
+ * functional component which renders the additional repo details
+ * @params repoId - pulled from url
+ * @returns - Details element which contains the details of the selected element
+ */
 const Details = () => {
   const { repoId } = useParams();
   const {
     data: { items },
   } = useStoreState((state) => state);
 
+  /**
+   * Error check to see if item information is stored in state
+   */
   if (items.length === 0) {
     return <ErrorScreen />;
   }
 
+  /**
+   * function to locate the repo by param - repoId
+   */
   const repo = items.find((repos) => {
     return repos.id === Number(repoId);
   });
 
+  /**
+   * destructuring of repo object
+   */
   let {
     name,
     html_url,
