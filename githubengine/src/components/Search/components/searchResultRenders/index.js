@@ -1,23 +1,14 @@
 import React, { useEffect, useState } from "react";
 import "./styles.scss";
-
+import { useStoreState } from "easy-peasy";
 import TableHeaderLabel from "./components/TableHeaderLabel";
 import TableDataRow from "./components/TableDataRow";
-import { useStoreState, useStoreActions } from "easy-peasy";
 
-// const SearchResultRenders = ({ searchResults, setSearchedRepos }) => {
 const SearchResultRenders = () => {
-  // let {
-  //   searchedTerm,
-  //   data: { items },
-  // } = searchResults;
-
   const {
     searchedTerm,
     data: { items },
   } = useStoreState((state) => state);
-
-  // console.log("searchResults", searchResults);
 
   const [sort, setSort] = useState({
     name: "score",
@@ -27,11 +18,10 @@ const SearchResultRenders = () => {
     filteredItems: items,
   });
 
-  useEffect(() => {
-    itemLanguages();
-  }, []);
-
-  const itemLanguages = () => {
+  /**
+   * useEffect call to compile list of unique languages on render
+   */
+  useEffect((sort) => {
     let languages = [];
     sort.filteredItems.forEach((repo) => {
       return languages.includes(repo.language)
@@ -40,7 +30,7 @@ const SearchResultRenders = () => {
     });
 
     setSort({ ...sort, languages });
-  };
+  }, []);
 
   const generateLanguageSelections = () => {
     const handleSelection = (e) => {
@@ -93,7 +83,6 @@ const SearchResultRenders = () => {
           {generateLanguageSelections()}
         </div>
       </div>
-
       <table className="results-table">
         <thead>
           <tr>
@@ -101,11 +90,7 @@ const SearchResultRenders = () => {
           </tr>
         </thead>
         <tbody>
-          <TableDataRow
-            items={items}
-            // setSearchedRepos={setSearchedRepos}
-            sort={sort}
-          />
+          <TableDataRow sort={sort} />
         </tbody>
       </table>
     </div>

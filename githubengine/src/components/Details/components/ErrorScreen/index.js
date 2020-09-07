@@ -15,6 +15,7 @@ const ErrorScreen = () => {
       <div className="failImage">
         <img
           className="image"
+          alt="Subterranean Homesick Blues, Wish I knew what I was looking for"
           src="https://media.giphy.com/media/li0dswKqIZNpm/giphy.gif"
         />
       </div>

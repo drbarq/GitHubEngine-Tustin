@@ -1,22 +1,4 @@
-import { createStore, action, thunk, debug } from "easy-peasy";
-
-const productsModel = {
-  items: {
-    1: { id: 1, name: "Peas", price: 10 },
-  },
-};
-
-// const basketModel = {
-//   productIds: [1],
-//   addProduct: action((state, payload) => {
-//     state.productIds.push(payload);
-//   }),
-// };
-
-// const storeModel = {
-//   products: productsModel,
-//   basket: basketModel,
-// };
+import { createStore, action, thunk } from "easy-peasy";
 
 const searchModel = {
   searchedTerm: "",
@@ -27,9 +9,12 @@ const searchModel = {
   },
   errors: null,
   serverMessage: "",
-  updateSearchedTerm: action((state, payload) => {
-    state.searchedTerm = payload;
-  }),
+  /**
+   * function which calls express backend to search cache and if needed
+   * make hit external github API
+   * @param {string} searchTerm - user inputed text for github search
+   * @returns - the response from the api call
+   */
   callBackEnd: thunk(async (actions, payload, { getState }) => {
     const response = await fetch(`/searchGitHub/${payload}`);
     const result = await response.json();
@@ -50,7 +35,6 @@ const searchModel = {
   }),
   updateDataObject: action((state, payload) => {
     state.data = payload.data;
-    console.log(debug(payload));
   }),
   updateErrorMessage: action((state, payload) => {
     state.errors = payload;

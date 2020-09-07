@@ -7,7 +7,6 @@ import { useParams, Link } from "react-router-dom";
 const Details = () => {
   const { repoId } = useParams();
   const {
-    searchedTerm,
     data: { items },
   } = useStoreState((state) => state);
 

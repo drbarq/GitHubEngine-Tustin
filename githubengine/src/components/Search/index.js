@@ -10,21 +10,10 @@ import SearchResultRenders from "./components/searchResultRenders";
  * @returns -  Search component which controls search results after response has been answered
  */
 
-const SearchBar = ({ setSearchedRepos }) => {
+const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState({
-    searchedTerm: "",
-    data: {
-      items: [],
-      incomplete_results: null,
-      total_count: null,
-    },
-  });
-
-  const { searchedTerm, data } = useStoreState((state) => state);
-  const { updateSearchedTerm, updateDataObject, callBackEnd } = useStoreActions(
-    (actions) => actions
-  );
+  const { data } = useStoreState((state) => state);
+  const { callBackEnd } = useStoreActions((actions) => actions);
 
   /**
    * handleSubmit function for search button, persist and prevent rerender
@@ -37,64 +26,9 @@ const SearchBar = ({ setSearchedRepos }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     e.persist();
-    // reset search results
-    setSearchResults({
-      searchedTerm: "",
-      data: {
-        items: [],
-        incomplete_results: null,
-        total_count: null,
-      },
-    });
 
-    let results = await callBackEnd(searchTerm);
-    // updateDataObject({ searchedTerm: searchTerm, data: results.data });
-    // setSearchResults({ searchedTerm: searchTerm, data: results.data });
+    await callBackEnd(searchTerm);
   };
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   e.persist();
-  //   // reset search results
-  //   setSearchResults({
-  //     searchedTerm: "",
-  //     data: {
-  //       items: [],
-  //       incomplete_results: null,
-  //       total_count: null,
-  //     },
-  //   });
-
-  //   let results = await callBackEnd(searchTerm);
-  //   updateDataObject({ searchedTerm: searchTerm, data: results.data });
-  //   setSearchResults({ searchedTerm: searchTerm, data: results.data });
-  // };
-
-  /**
-   * function which calls express backend to search cache and if needed
-   * make hit external github API
-   * @param {string} searchTerm - user inputed text for github search
-   * @returns - the response from the api call
-   */
-  // const callBackEnd = async (searchTerm) => {
-  //   const response = await fetch(`/searchGitHub/${searchTerm}`);
-  //   const body = await response.json();
-
-  //   if (response.status !== 200) {
-  //     throw Error(body.message);
-  //   } else {
-  //     return body;
-  //   }
-  // };
-  // const callBackEnd = async (searchTerm) => {
-  //   const response = await fetch(`/searchGitHub/${searchTerm}`);
-  //   const body = await response.json();
-
-  //   if (response.status !== 200) {
-  //     throw Error(body.message);
-  //   } else {
-  //     return body;
-  //   }
-  // };
 
   return (
     <div className="searchBar-container" data-test="component-searchBar">
@@ -123,15 +57,8 @@ const SearchBar = ({ setSearchedRepos }) => {
         </form>
       </div>
       {/* {searchResults.data.items.length > 0 ? ( */}
-      {data.items.length > 0 ? (
-        <SearchResultRenders
-        // searchResults={searchResults}
-        // setSearchedRepos={setSearchedRepos}
-        />
-      ) : (
-        ""
-      )}
-      {searchResults.data.total_count === 0 ? (
+      {data.items.length > 0 ? <SearchResultRenders /> : ""}
+      {data.total_count === 0 ? (
         <div>You have yourself a good idea, no repos match those terms</div>
       ) : (
         ""
