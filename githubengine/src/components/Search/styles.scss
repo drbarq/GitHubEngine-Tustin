@@ -6,7 +6,7 @@
   width: 100%;
 
   .form-container {
-    background-color: lighten(#e1c340, 30%);
+    background-color: #eaf2fc;
     width: 90%;
     display: flex;
     flex-direction: row;
@@ -23,6 +23,16 @@
     .input {
       display: flex;
       width: 80%;
+    }
+
+    .button {
+      background-color: #2e57ea;
+      color: white;
+
+      &:hover {
+        background-color: #2b4dc6;
+        // background-color: white;
+      }
     }
   }
 }
