@@ -1,6 +1,6 @@
 # ![alt text](https://i.imgur.com/OVEefhu.png)
 
-> Web application that makes searching GitHub a breeze
+A web application that makes searching GitHub a breeze
 
 ## Demo 
 
