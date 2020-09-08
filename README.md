@@ -10,7 +10,8 @@
 ## Starting Project
 
 1. Install dependencies for each folder
-
+   
+   - `cd GitHubEngine-Tustin`
    - `cd githubengine`
    - `npm install`
    - `cd ..`
