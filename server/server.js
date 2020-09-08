@@ -53,7 +53,6 @@ app.get("/searchGitHub/:searchTerm", async (req, res) => {
           data: JSON.parse(cacheResults),
         });
       } else {
-        pi;
         let gitHubSearchURL = `https://api.github.com/search/repositories?q=${searchTerm}`;
         const githubResults = await axios.get(gitHubSearchURL, gitHubHeaders);
         redisCache.setex(
