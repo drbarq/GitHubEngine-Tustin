@@ -1,7 +1,11 @@
-
 # ![alt text](https://i.imgur.com/OVEefhu.png)
 
 > Web application that makes searching GitHub a breeze
+
+## Demo 
+
+![alt text](https://media.giphy.com/media/JmD2eYnlUS2DDxqBVe/giphy.gif)
+
 
 ## Starting Project
 
