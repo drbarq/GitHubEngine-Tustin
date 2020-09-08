@@ -17,7 +17,9 @@
    > within ./server folder
 
    - `npm run start-cache`
-     > Open a new terminal: check redis is connected: should recieve PONG back
+
+   > Open a new terminal: check redis is connected - should recieve PONG back
+
    - `npm run test-cache-ping`
 
 3. Start server
@@ -41,12 +43,19 @@
    - `npm test`
 
 2. Backend Server Tests
+
    > from parent folder
+
    - `cd server`
-     > clear current cache
+
+   > clear current cache
+
    - `npm run delete-cache`
-     > start cache
+
+   > start cache
+
    - `npm run start-cache`
+
    - `npm test`
 
 ## Project Structure
