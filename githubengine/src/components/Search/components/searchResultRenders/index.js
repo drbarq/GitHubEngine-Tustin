@@ -16,17 +16,40 @@ const SearchResultRenders = () => {
   } = useStoreState((state) => state);
 
   const [sort, setSort] = useState({
-    name: "score",
+    name: "",
     accend: null,
     filterLanguage: "all",
     languages: [],
     filteredItems: items,
   });
+  // const [sort, setSort] = useState({
+  //   name: "stargazers_count",
+  //   accend: false,
+  //   filterLanguage: "all",
+  //   languages: [],
+  //   filteredItems: items,
+  // });
 
   /**
    * useEffect call to compile list of unique languages on render
    * resets the local state and updates when items changes
    */
+  // useEffect(() => {
+  //   let languages = [];
+  //   items.forEach((repo) => {
+  //     return languages.includes(repo.language)
+  //       ? null
+  //       : languages.push(repo.language);
+  //   });
+  //   setSort({
+  //     name: "stargazers_count",
+  //     accend: false,
+  //     filterLanguage: "all",
+  //     languages,
+  //     filteredItems: items,
+  //   });
+  // }, [items]);
+
   useEffect(() => {
     let languages = [];
     items.forEach((repo) => {

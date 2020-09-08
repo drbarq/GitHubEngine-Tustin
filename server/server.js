@@ -43,12 +43,9 @@ app.get("/searchGitHub/:searchTerm", async (req, res) => {
   try {
     const { searchTerm } = req.params;
     redisCache.get(searchTerm, async (err, cacheResults) => {
-      // respond with any errors
       if (err) {
         return res.status(400).send(`Error with redis cache ${err}`);
       }
-
-      // first, check the cache
       if (cacheResults) {
         return res.status(200).send({
           error: false,
@@ -56,10 +53,9 @@ app.get("/searchGitHub/:searchTerm", async (req, res) => {
           data: JSON.parse(cacheResults),
         });
       } else {
-        // if nothing found in cache, call the api
+        pi;
         let gitHubSearchURL = `https://api.github.com/search/repositories?q=${searchTerm}`;
         const githubResults = await axios.get(gitHubSearchURL, gitHubHeaders);
-        // save record to cache
         redisCache.setex(
           searchTerm,
           cacheExpirationInSeconds,
