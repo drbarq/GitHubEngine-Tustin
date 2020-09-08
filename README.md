@@ -47,7 +47,7 @@
    - `cd githubengine`
    - `npm test`
 
-2. Backend Server Tests
+2. Backend Server Tests: Please clear cache before running tests
 
    > from parent folder
 
