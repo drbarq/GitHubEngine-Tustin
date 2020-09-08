@@ -1,4 +1,5 @@
 # GitHub Engine
+![alt text](https://i.imgur.com/OVEefhu.png)
 
 > Web application that makes searching GitHub a breeze
 
