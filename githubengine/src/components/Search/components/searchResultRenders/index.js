@@ -16,7 +16,7 @@ const SearchResultRenders = () => {
   } = useStoreState((state) => state);
 
   const [sort, setSort] = useState({
-    name: "",
+    name: "score",
     accend: null,
     filterLanguage: "all",
     languages: [],
