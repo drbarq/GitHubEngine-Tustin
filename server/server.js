@@ -8,7 +8,9 @@ const app = express();
 const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(logger("dev"));
-const client = redis.createClient(6379);
+// const client = redis.createClient(6379);
+const redisCache = redis.createClient(6379);
+// change to RedisPort
 
 client.on("error", (error) => {
   console.error(error);
@@ -37,7 +39,8 @@ These search queries will return a "Validation failed" error message.
 app.get("/searchGitHub/:searchTerm", async (req, res) => {
   try {
     const { searchTerm } = req.params;
-    client.get(searchTerm, async (err, results) => {
+    // update to cache
+    redisCache.get(searchTerm, async (err, results) => {
       // first check the cache
       if (results) {
         return res.status(200).send({
@@ -49,7 +52,8 @@ app.get("/searchGitHub/:searchTerm", async (req, res) => {
         // if not found in cache, hit the api
         let gitHubSearchURL = `https://api.github.com/search/repositories?q=${searchTerm}`;
         const result = await axios.get(gitHubSearchURL, gitHubHeaders);
-        //   save record to cache
+        // save record to cache
+        // 1440 create variable for timeout:  after the headers
         client.setex(searchTerm, 1440, JSON.stringify(result.data));
 
         return res.status(200).send({
@@ -60,13 +64,10 @@ app.get("/searchGitHub/:searchTerm", async (req, res) => {
       }
     });
   } catch (error) {
-    console.log(error);
+    // console log string to describe the error
+    console.log("error2222", error);
   }
 });
-
-/**
- * Once server is running, displays message in terminal indicating the inuse port
- */
 
 app.listen(port, () => {
   console.log(`Server running on ${port}`);
