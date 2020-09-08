@@ -11,10 +11,17 @@
     height: 100vh;
 
     .title-header {
-      font-weight: bold;
       letter-spacing: 0.4rem;
       font-size: 2rem;
       margin: 4vh 0;
+      display: flex;
+      flex-direction: row;
+      .bold {
+        font-weight: bold;
+      }
+      .light {
+        font-weight: light;
+      }
     }
   }
 }

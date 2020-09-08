@@ -15,7 +15,8 @@ function App() {
     <div className="App-root" data-test="component-app">
       <div className="App-container">
         <div className="title-header" data-test="component-app-title">
-          GitHub Engine
+          <div className="bold">GitHub</div>
+          <div className="light">Engine</div>
         </div>
         <Switch>
           <Route path="/" component={() => <Search />} exact />
