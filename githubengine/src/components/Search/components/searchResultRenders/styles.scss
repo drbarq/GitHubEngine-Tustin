@@ -26,6 +26,16 @@
   .results-table {
     width: 100%;
     vertical-align: middle;
+    padding: 0 10px;
+
+    th {
+      background-color: #eaf2fc;
+      color: black;
+    }
+
+    th:hover {
+      color: #2e57ea;
+    }
 
     tr {
       border: 1px solid #ddd;
@@ -34,12 +44,8 @@
     .repoInformation-row {
       border-spacing: 2rem;
 
-      a:link {
-        color: #362f3f;
-      }
-
       a:visited {
-        color: lighten(#362f3f, 30%);
+        color: lighten(#2b4dc6, 20%);
       }
 
       td {
@@ -50,18 +56,30 @@
 
       td:first-child {
         width: 60%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 25ch;
       }
     }
+
     tr:nth-child(even) {
-      background-color: #a4e8e0;
+      background-color: #000000;
+      a:link {
+        color: #ffffff;
+      }
     }
+
     tr:nth-child(odd) {
-      background-color: #4cd7d0;
+      background-color: #ffffff;
+      a:link {
+        color: #000000;
+      }
     }
 
     tr:hover {
       cursor: pointer;
-      background-color: #f8ea8c;
+      background-color: #2e57ea;
     }
   }
 }
