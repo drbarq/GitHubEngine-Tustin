@@ -77,6 +77,12 @@ app.get("/searchGitHub/:searchTerm", async (req, res) => {
       "Cache failed and the external API failed to return any information",
       error
     );
+
+    return res.status(400).send({
+      message:
+        "Cache failed and the external API failed to return any information",
+      error: error,
+    });
   }
 });
 

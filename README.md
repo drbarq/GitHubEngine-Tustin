@@ -4,37 +4,50 @@
 
 ## Starting Project
 
-> Available Scripts
+1. Install dependencies for each folder
 
-**Install Dependencies**
+   - `cd githubengine`
+   - `npm install`
+   - `cd ..`
+   - `cd server`
+   - `npm install`
 
-`npm install`
+2. Start redis cache
 
-**Start the Redis cache**
+   > within ./server folder
 
-`cd server`
+   - `npm run start-cache`
+     > Open a new terminal: check redis is connected: should recieve PONG back
+   - `npm run test-cache-ping`
 
-`redis-server`
+3. Start server
 
-> check redis is connected: should recieve PONG back
+   > within ./server folder
 
-`redis-cli ping`
+   - `npm start`
 
-**Start the server**
+4. Start GitHub Engine
+   - `cd ..`
+   - `cd githubengine`
+   - `npm start`
 
-`nodemon server.js`
+## Starting Tests
 
-**Start GitHub Engine**
+1. GitHub Engine Test
 
-`cd ..`
+   > from parent folder
 
-`cd githubengine`
+   - `cd githubengine`
+   - `npm test`
 
-`npm start`
-
-**Run tests for GitHub Engine**
-
-`npm test`
+2. Backend Server Tests
+   > from parent folder
+   - `cd server`
+     > clear current cache
+   - `npm run delete-cache`
+     > start cache
+   - `npm run start-cache`
+   - `npm test`
 
 ## Project Structure
 

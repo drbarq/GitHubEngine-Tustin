@@ -4,8 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "test": "jest",
+    "start": "nodemon server.js",
+    "delete-cache": "redis-cli FLUSHDB",
+    "start-cache": "redis-server",
+    "test-cache-ping": "redis-cli ping"
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +19,15 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
     "redis": "^3.0.2"
+  },
+  "devDependencies": {
+    "jest": "^26.4.2",
+    "supertest": "^4.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }
