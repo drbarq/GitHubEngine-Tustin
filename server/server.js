@@ -1,25 +1,28 @@
 const express = require("express");
 const logger = require("morgan");
 const axios = require("axios");
-var cors = require("cors");
+const cors = require("cors");
 const redis = require("redis");
 
 const app = express();
 const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(logger("dev"));
-// const client = redis.createClient(6379);
-const redisCache = redis.createClient(6379);
-// change to RedisPort
 
-client.on("error", (error) => {
-  console.error(error);
+const redisCache = redis.createClient(6379);
+
+redisCache.on("error", (error) => {
+  console.log(`Whoops!  Looks like the redis cache server isn't connected`);
+  console.log(`run 'redis-server' in a seperate terminal`);
+  console.error(`Full error message:`, error);
 });
 
 let gitHubHeaders = {
   "Access-Control-Allow-Origin": "*",
   Accept: "application/vnd.github.mercy-preview+json",
 };
+
+let cacheExpirationInSeconds = 1440;
 
 /**
  * GitHub API Query constraints
@@ -39,33 +42,41 @@ These search queries will return a "Validation failed" error message.
 app.get("/searchGitHub/:searchTerm", async (req, res) => {
   try {
     const { searchTerm } = req.params;
-    // update to cache
-    redisCache.get(searchTerm, async (err, results) => {
-      // first check the cache
-      if (results) {
+    redisCache.get(searchTerm, async (err, cacheResults) => {
+      // respond with any errors
+      if (err) {
+        return res.status(400).send(`Error with redis cache ${err}`);
+      }
+
+      // first, check the cache
+      if (cacheResults) {
         return res.status(200).send({
           error: false,
           message: `Results for ${searchTerm} from the cache`,
-          data: JSON.parse(results),
+          data: JSON.parse(cacheResults),
         });
       } else {
-        // if not found in cache, hit the api
+        // if nothing found in cache, call the api
         let gitHubSearchURL = `https://api.github.com/search/repositories?q=${searchTerm}`;
-        const result = await axios.get(gitHubSearchURL, gitHubHeaders);
+        const githubResults = await axios.get(gitHubSearchURL, gitHubHeaders);
         // save record to cache
-        // 1440 create variable for timeout:  after the headers
-        client.setex(searchTerm, 1440, JSON.stringify(result.data));
-
+        redisCache.setex(
+          searchTerm,
+          cacheExpirationInSeconds,
+          JSON.stringify(githubResults.data)
+        );
         return res.status(200).send({
           errror: false,
           message: `Results for ${searchTerm} from Github`,
-          data: result.data,
+          data: githubResults.data,
         });
       }
     });
   } catch (error) {
-    // console log string to describe the error
-    console.log("error2222", error);
+    console.log(
+      "Cache failed and the external API failed to return any information",
+      error
+    );
   }
 });
 
